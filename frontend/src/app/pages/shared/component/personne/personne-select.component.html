@@ -1,0 +1,25 @@
+<!--
+-->
+<div *ngFor="let personne of personnes">
+    <div class="p-grid p-ai-center" >
+        <div class="p-col-10">
+            <div>
+                <span style="display: block; font-size: 18px; font-weight: bold">{{ personne.prenom }} {{ personne.nom }}</span>
+                <div>
+                    <span style="display: inline-block; padding: 7px 0px; padding-right: 11px">Tel: <strong>{{ personne.telephone }}</strong></span>
+                    <span style="display: inline-block; padding: 7px 0px; padding-right: 11px">Email: <strong>{{ personne.email }}</strong></span>
+                </div>
+                <div>
+                    <span style="display: inline-block; padding: 7px 0px; padding-right: 11px">Pays: <strong>{{ personne?.adresse?.pays }}</strong></span>
+                    <span style="display: inline-block; padding: 7px 0px; padding-right: 11px">Ville: <strong>{{ personne?.adresse?.ville }}</strong></span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="p-col-2">
+            <button pButton icon="pi pi-arrow-down" (click)="selectPersonne(personne)"></button>
+        </div>
+    </div>
+    <hr size="1px" align="left" color="#d9dad9">
+</div>

@@ -1,0 +1,83 @@
+<!--
+-->
+<div>
+    <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+    <app-breadcrumb [breadcrumbItems]="breadcrumbItems"></app-breadcrumb>
+
+    <div class="card card-w-title main-content" [formGroup]="clientForm">
+        <h1>Création d'un nouveau client</h1>
+
+        <div>
+            <div style="margin-bottom: 11px">
+                <div><span>Nom</span></div>
+                <div class="ui-inputgroup">
+                    <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+                    <input pInputText formControlName="nom">
+                </div>
+            </div>
+
+            <div style="margin-bottom: 11px">
+                <div><span>Prénom</span></div>
+                <div class="ui-inputgroup">
+                    <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+                    <input pInputText formControlName="prenom">
+                </div>
+            </div>
+            <div style="margin-bottom: 11px">
+                <div><span>Email</span></div>
+                <div class="ui-inputgroup">
+                    <span class="ui-inputgroup-addon"><i class="fa fa-envelope-square"></i></span>
+                    <input pInputText formControlName="email">
+                </div>
+            </div>
+            <div style="margin-bottom: 11px">
+                <div><span>Téléphone</span></div>
+                <div class="ui-inputgroup">
+                    <span class="ui-inputgroup-addon"><i class="fa fa-phone"></i></span>
+                    <input pInputText formControlName="telephone">
+                </div>
+            </div>
+            <div style="margin-bottom: 11px">
+                <div><span>Pays</span></div>
+                <div class="ui-inputgroup">
+                    <span class="ui-inputgroup-addon"><i class="fa fa-flag"></i></span>
+                    <p-dropdown [formControl]="clientForm.get('adresse').get('pays')"
+                                [options]="paysOptions" [autoDisplayFirst]="false"></p-dropdown>
+                </div>
+            </div>
+            <div style="margin-bottom: 11px">
+                <div><span>Code postal</span></div>
+                <div class="ui-inputgroup">
+                    <span class="ui-inputgroup-addon"><i class="fa fa-map-marker"></i></span>
+                    <input pInputText [formControl]="clientForm.get('adresse').get('codePostal')">
+                </div>
+            </div>
+            <div style="margin-bottom: 11px">
+                <div><span>Ville</span></div>
+                <div class="ui-inputgroup">
+                    <span class="ui-inputgroup-addon"><i class="fa fa-building"></i></span>
+                    <input pInputText [formControl]="clientForm.get('adresse').get('ville')">
+                </div>
+            </div>
+            <div style="margin-bottom: 11px">
+                <div><span>Rue</span></div>
+                <div class="ui-inputgroup">
+                    <span class="ui-inputgroup-addon"><i class="fa fa-street-view"></i></span>
+                    <input pInputText [formControl]="clientForm.get('adresse').get('rue')">
+                </div>
+            </div>
+
+            <div style="margin-top: 15px">
+                <button pButton label="Retour" class="ui-button-secondary small-screen-hide" style="margin-right: 7px"
+                        icon="fa fa-chevron-left" (click)="back()">
+                </button>
+                <button pButton label="Enregistrer" icon="fa fa-save" (click)="enregistrer()" style="margin-right: 7px"></button>
+                <button pButton label="Supprimer" icon="fa fa-trash"
+                        class="ui-button ui-button-danger big-screen-hide"
+                        (click)="confirmerSuppression()"></button>
+            </div>
+
+        </div>
+    </div>
+</div>

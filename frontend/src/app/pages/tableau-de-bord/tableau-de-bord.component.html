@@ -1,0 +1,177 @@
+<div class="ui-g dashboard">
+    <div class="ui-g-12 big-screen-hide" >
+        <button pButton label="Scanner un envoi" style="width: 100%; height: 75px" icon="fa fa-camera" iconPos="right"></button>
+    </div>
+
+    <div class="ui-g-12 ui-md-6 ui-lg-3">
+        <div class="ui-g card overview-box overview-box-1 no-gutter">
+            <div class="overview-box-title">Colis confiés au fret</div>
+            <div class="overview-box-details">
+                <i class="fa fa-plane overview-box-details-icon"></i>
+                <span class="overview-box-details-count">150</span>
+            </div>
+<!--
+            <div class="overview-box-stats" style="color:#3fb839">+%50</div>
+-->
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-6 ui-lg-3">
+        <div class="ui-g card overview-box overview-box-2 no-gutter">
+            <div class="overview-box-title">Colis receptionés aujourd'hui</div>
+            <div class="overview-box-details">
+                <i class="fa fa-truck overview-box-details-icon"></i>
+                <span class="overview-box-details-count">99</span>
+            </div>
+<!--            <div class="overview-box-stats" style="color:#3fb839">+%75</div>-->
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-6 ui-lg-3">
+        <div class="ui-g card overview-box overview-box-3 no-gutter">
+            <div class="overview-box-title">Colis livrés aujourd'hui</div>
+            <div class="overview-box-details">
+                <i class="fa fa-get-pocket overview-box-details-icon"></i>
+                <span class="overview-box-details-count">25</span>
+            </div>
+<!--            <div class="overview-box-stats" style="color:#3fb839">+%50</div>-->
+        </div>
+    </div>
+    <div class="ui-g-12 ui-md-6 ui-lg-3">
+        <div class="ui-g card overview-box overview-box-4 no-gutter">
+            <div class="overview-box-title">Partenaires connectés</div>
+            <div class="overview-box-details">
+                <i class="fa fa-user overview-box-details-icon"></i>
+                <span class="overview-box-details-count">9</span>
+            </div>
+<!--            <div class="overview-box-stats" style="color:#e17576">-%15</div>-->
+        </div>
+    </div>
+
+
+
+<!--    <div class="ui-g-12 ui-lg-12 global-sales">-->
+<!--        <p-panel header="Nombre de colis envoyés en fonction des pays">-->
+<!--            <div class="globe">-->
+<!--                <img src="assets/layout/images/dashboard/globe.png" width="45">-->
+<!--            </div>-->
+
+<!--            <span class="sale-interval">20 Mars - 27 Mars</span>-->
+<!--            <button pButton type="button" label="Rafraichir" icon="fa fa-refresh" class="raised-btn"></button>-->
+
+<!--            <table>-->
+<!--                <tbody>-->
+<!--                <tr>-->
+<!--                    <td><img src="assets/layout/images/dashboard/flag-cameroun.png" width="45" style="border-radius: 50%"></td>-->
+<!--                    <td>Cameroun</td>-->
+<!--                    <td>4234</td>-->
+<!--                    <td>10%</td>-->
+<!--                    <td><i class="fa fa-arrow-up"></i></td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td><img src="assets/layout/images/dashboard/flag-china.png" width="45"></td>-->
+<!--                    <td>Rwanda</td>-->
+<!--                    <td>3214</td>-->
+<!--                    <td>25%</td>-->
+<!--                    <td><i class="fa fa-arrow-up"></i></td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td><img src="assets/layout/images/dashboard/flag-belgium.png" width="45"></td>-->
+<!--                    <td>Burkina faso</td>-->
+<!--                    <td>2842</td>-->
+<!--                    <td>28%</td>-->
+<!--                    <td><i class="fa fa-arrow-down"></i></td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td><img src="assets/layout/images/dashboard/flag-france.png" width="45"></td>-->
+<!--                    <td>Congo</td>-->
+<!--                    <td>1942</td>-->
+<!--                    <td>15%</td>-->
+<!--                    <td><i class="fa fa-arrow-up"></i></td>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </p-panel>-->
+<!--    </div>-->
+
+
+
+
+
+<!--    <div class="ui-g-12 ui-lg-12">-->
+<!--        <div class="card">-->
+
+
+<!--            <p-dataView #dv [value]="envois" [paginator]="true" [rows]="10" paginatorPosition="bottom" emptyMessage="Aucun résultat">-->
+<!--                <p-header>Envois de coli recents</p-header>-->
+<!--                <ng-template let-envoi pTemplate="listItem">-->
+<!--                    <div class="p-col-12">-->
+<!--                        <div class="p-grid p-ai-center vertical-container">-->
+<!--                            <div class="p-col-12">-->
+<!--                                <div>-->
+<!--                                    <div class="p-grid p-ai-center vertical-container">-->
+<!--                                        <div class="p-col">-->
+<!--                                            <span style="display: inline-block; font-size: 18px; font-weight: bold;">{{ envoi.reference }} </span>-->
+<!--                                        </div>-->
+<!--                                        <div class="p-col">-->
+<!--                                            <span style="background-color: #FBBC05; border-radius: 50%; color: white; padding: 7px 11px;">{{ 'Pris en charge' }}</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div>-->
+<!--                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px">Volume: <strong>{{ getVolume(envoi.coli) }} m³</strong></span>-->
+<!--                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px">Poids: <strong>{{ envoi.coli.poids }} kg</strong></span>-->
+<!--                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px">Montant payé: <strong>{{ envoi.montant }} EUR</strong></span>-->
+<!--                                    </div>-->
+<!--                                    <div>-->
+<!--                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px">Expéditeur: <strong>{{ getExpediteur(envoi.expediteur) }}</strong></span>-->
+<!--                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px">Pays expédition: <strong>{{ getPaysExpedition(envoi.expediteur) }}</strong></span>-->
+<!--                                    </div>-->
+<!--                                    <div>-->
+<!--                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px">Destinataire: <strong>{{ envoi?.destinataire?.nom }}</strong></span>-->
+<!--                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px">Pays de destination: <strong>{{ envoi?.destinataire?.pays }}</strong></span>-->
+<!--                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px">Ville de destination: <strong>{{ envoi?.destinataire?.ville }}</strong></span>-->
+<!--                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px">Adresse de destination: <strong>{{ envoi?.destinataire?.adresse }}</strong></span>-->
+<!--                                    </div>-->
+
+<!--                                </div>-->
+<!--                            </div>-->
+
+<!--                        </div>-->
+<!--                        <hr size="1px" align="left" color="#d9dad9">-->
+<!--                    </div>-->
+<!--                </ng-template>-->
+
+<!--            </p-dataView>-->
+
+
+
+
+<!--&lt;!&ndash;            <p-dataView #dv [value]="envois" [rows]="5">&ndash;&gt;-->
+<!--&lt;!&ndash;                <p-header>Envois de coli recents</p-header>&ndash;&gt;-->
+<!--&lt;!&ndash;                <ng-template let-envoi pTemplate="listItem">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="ui-g-12" style="border-bottom: 1px solid #d9dad9; padding-top: 9px">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div >&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="ui-g-9">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <span style="display: block; font-size: 18px; font-weight: bold">{{ envoi.volumeColi }} m³ - {{ envoi.montantTotalTransaction }} Euro - {{ envoi.etatColi }}</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px">Emetteur: <strong>{{ envoi.emetteur }}</strong></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px">Pays expédition: <strong>{{ envoi.paysExpedition }}</strong></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px">Destinataire: <strong>{{ envoi.destinataire }}</strong></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px">Pays de destination: <strong>{{ envoi.paysDestination }}</strong></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px">Ville de destination: <strong>{{ envoi.villeDestination }}</strong></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px">Adresse de destination: <strong>{{ envoi.adresseDestination }}</strong></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                </ng-template>&ndash;&gt;-->
+
+<!--&lt;!&ndash;            </p-dataView>&ndash;&gt;-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+</div>

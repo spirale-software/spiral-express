@@ -1,0 +1,69 @@
+<!--
+-->
+<p-dialog header="Signature du client" [(visible)]="display" [modal]="true">
+    <div>
+        <span style="display: block">Entrer le code reçu via email</span>
+        <input pInputText>
+    </div>
+
+    <p-footer>
+        <app-button-group (retourClicked)="back()" (validerClicked)="onConfirmerReceptionClicked()" validerLabel="Confirmer la reception du coli"></app-button-group>
+    </p-footer>
+</p-dialog>
+
+<div>
+    <app-breadcrumb [breadcrumbItems]="breadcrumbItems"></app-breadcrumb>
+
+    <div class="card card-w-title">
+        <h1>Encoder la livraison de coli</h1>
+
+        <div>
+            <span style="font-weight: bold; font-size: 18px">{{ envoi?.reference }}</span>
+            <div class="p-grid" style="margin-top: 9px">
+                <div class="p-col">
+                    <span style="display: block">Nbr d'unité</span>
+                    <span>3</span>
+                </div>
+                <div class="p-col">
+                    <span style="display: block">Poids</span>
+                    <span>{{ envoi?.coli?.poids }} kg</span>
+                </div>
+                <div class="p-col">
+                    <span style="display: block">Volume</span>
+                    <span>{{ coliVolume }} m³</span>
+                </div>
+                <div class="p-col">
+                    <span style="display: block">Description coli</span>
+                    <span>{{ envoi?.coli?.description }}</span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="p-grid">
+            <div class="p-col">
+                <h3>Expéditeur</h3>
+                <div>
+                    <span style="display: block">GYLE THE BEST</span>
+                    <span style="display: block; padding-bottom: 9px">(0032) 455 55 55</span>
+                    <span style="display: block">QUAI DES SALINES</span>
+                    <span style="display: block">7500 TOURNAI</span>
+                    <span style="display: block">BELGIQUE</span>
+                </div>
+            </div>
+            <div class="p-col">
+                <h3>Destinataire</h3>
+                <div>
+                    <span style="display: block">SPIRAL MEDIA</span>
+                    <span style="display: block; padding-bottom: 9px">(00237) 455 55 55</span>
+                    <span style="display: block">NEW BELL</span>
+                    <span style="display: block">DOUALA</span>
+                    <span style="display: block">CAMEROUN</span>
+                </div>
+            </div>
+        </div>
+
+        <app-button-group (retourClicked)="back()" (validerClicked)="onValiderClicked()" validerLabel="Enregistrer livraison coli"></app-button-group>
+    </div>
+
+</div>

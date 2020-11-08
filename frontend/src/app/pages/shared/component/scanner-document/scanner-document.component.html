@@ -1,0 +1,15 @@
+<!--
+-->
+<div>
+    <div *ngIf="!isScannerAllowed">
+        <input pInputText placeholder="Entrer la référence de l'envoi" style="border-radius: 15px; width: 250px"><br><br>
+        <p>Ou</p><br>
+        <button pButton label="Scanner le document" (click)="onScannerClicked()"></button>
+    </div>
+    <ng-template [ngIf]="isScannerAllowed">
+        <zxing-scanner (scanSuccess)="onScanOK($event)"
+                       [formats]="['QR_CODE', 'EAN_13', 'CODE_128', 'DATA_MATRIX']">
+        </zxing-scanner>
+    </ng-template>
+</div>
+

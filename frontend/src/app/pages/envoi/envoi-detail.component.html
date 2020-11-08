@@ -1,0 +1,84 @@
+<!--
+-->
+<div>
+    <ng-template [ngIf]="!isOpenLikeDialog">
+        <app-breadcrumb [breadcrumbItems]="breadcrumbItems"></app-breadcrumb>
+    </ng-template>
+
+
+    <div class="card card-w-title">
+        <h1 *ngIf="!isOpenLikeDialog">Détail d'un envoi</h1>
+
+
+        <div style="margin-bottom: 15px"><span style="font-weight: bold; font-size: 18px">{{ envoi?.reference }}</span></div>
+
+        <div class="p-grid" style="margin-bottom: 21px">
+            <div class="p-col">
+                <span class="nom-label">Date</span>
+                <span>{{ envoi?.dateCreation }}</span>
+            </div>
+            <div class="p-col">
+                <span class="nom-label">Statut</span>
+                <span>{{ envoi?.statut }}</span>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 21px">
+            <span class="nom-label">Description coli</span>
+            <span>{{ envoi?.coli?.description }}</span>
+        </div>
+
+        <div class="p-grid" >
+            <div class="p-col">
+                <span class="nom-label">Longueur</span>
+                <span>{{ envoi?.coli?.longueur }} cm</span>
+            </div>
+            <div class="p-col">
+                <span class="nom-label">Largeur</span>
+                <span>{{ envoi?.coli?.largeur }} cm</span>
+            </div>
+        </div>
+
+        <div class="p-grid">
+            <div class="p-col">
+                <span class="nom-label">Hauteur</span>
+                <span>{{ envoi?.coli?.hauteur }} cm</span>
+            </div>
+            <div class="p-col">
+                <span class="nom-label">Poids</span>
+                <span>{{ envoi?.coli?.poids }} kg</span>
+            </div>
+        </div>
+
+        <div class="p-grid" style="margin-bottom: 21px">
+            <div class="p-col">
+                <span class="nom-label">Volume</span>
+                <span>{{ volume }} m³</span>
+            </div>
+            <div class="p-col">
+                <span class="nom-label">Poids volumétrique</span>
+                <span>{{ poidsVolumetrique }} kg/m3</span>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 21px">
+            <span class="nom-label">Expéditeur</span>
+            <span style="display: block">{{ fullNameExpediteur }}</span>
+            <span>{{ adresseExpediteur }}</span>
+        </div>
+
+        <div style="margin-bottom: 21px">
+            <span class="nom-label">Destinataire</span>
+            <span style="display: block">{{ fullNameDestinataire }}</span>
+            <span>{{ adresseDestinataire }}</span>
+        </div>
+
+        <div>
+            <span class="nom-label">Montant à payer</span>
+            <span style="display: block">{{ envoi?.montant }} EUR</span>
+        </div>
+
+
+    </div>
+
+</div>

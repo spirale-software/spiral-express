@@ -1,0 +1,62 @@
+<!--
+-->
+<div>
+    <app-breadcrumb [breadcrumbItems]="breadcrumbItems"></app-breadcrumb>
+
+    <div class="card card-w-title main-content">
+        <div class="ui-g">
+            <div class="ui-g-9"><h1>Liste des envois de coli</h1></div>
+            <div class="ui-g-3 small-screen-hide"><p-button label="Encoder un nouvel envoi" icon="pi pi-plus" [routerLink]="['/envois/creer']"></p-button></div>
+            <div class="ui-g-3 big-screen-hide"><p-button icon="pi pi-plus" [routerLink]="['/envois/creer']"></p-button></div>
+        </div>
+
+        <div>
+            <p-dataView #dv [value]="envois" [paginator]="true" [rows]="10" paginatorPosition="bottom">
+                <ng-template let-envoi pTemplate="listItem">
+                    <div class="p-col-12">
+                        <div class="p-grid p-ai-center vertical-container">
+                            <div class="p-col-12 p-md-8" >
+                                <div (click)="navigateTo(envoi)">
+                                    <div class="p-grid p-ai-center vertical-container">
+                                        <div class="p-col">
+                                            <span style="display: inline-block; font-size: 18px; font-weight: bold;">{{ envoi.reference }} </span>
+                                        </div>
+                                        <div class="p-col">
+                                            <span style="background-color: #FBBC05; border-radius: 50%; color: white; padding: 7px 11px;">{{ envoi.statut }}</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px"><i class="fa fa-dot-circle-o"></i> Volume: <strong>{{ getVolume(envoi.coli) }} m³</strong></span>
+                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px"><i class="fa fa-dot-circle-o"></i> Poids: <strong>{{ envoi.coli.poids }} kg</strong></span>
+                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px"><i class="fa fa-euro"></i> Montant payé: <strong>{{ envoi.montant }} EUR</strong></span>
+                                    </div>
+                                    <div>
+                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px"><i class="fa fa-user"></i> Expéditeur: <strong>{{ getExpediteur(envoi.expediteur) }}</strong></span>
+                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px"><i class="fa fa-flag"></i> Pays expédition: <strong>{{ getPaysExpedition(envoi.expediteur) }}</strong></span>
+                                    </div>
+                                    <div>
+                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px"><i class="fa fa-user"></i> Destinataire: <strong>{{ envoi?.destinataire?.prenom }} {{ envoi?.destinataire?.nom }}</strong></span>
+                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px"><i class="fa fa-flag"></i> Pays de destination: <strong>{{ envoi?.destinataire?.adresse.pays }}</strong></span>
+                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px"><i class="fa fa-building"></i> Ville de destination: <strong>{{ envoi?.destinataire?.adresse.ville }}</strong></span>
+<!--                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px">Adresse de destination: <strong>{{ envoi?.destinataire?.adresse.adresse }}</strong></span>-->
+                                    </div>
+                                </div>
+                                <button pButton label="Imprimer" icon="pi pi-file-pdf" style="margin-right: 7px" class="big-screen-hide"
+                                        (click)="genererDocument(envoi.id)"></button>
+                            </div>
+
+                            <div class="p-md-4 small-screen-hide">
+                                <button pButton label="Imprimer" icon="pi pi-file-pdf" style="margin-right: 7px" (click)="genererDocument(envoi.id)"></button>
+                                <button pButton label="Détail" icon="fa fa-eye" style="margin-right: 7px; background-color: #17a2b8" [routerLink]="['/envois', envoi.id, 'detail']"></button>
+                                <button pButton label="Modifier" icon="fa fa-pencil" style="margin-right: 7px" class="ui-button ui-button-warning"></button>
+<!--                                <button pButton label="Supprimer" icon="fa fa-trash" class="ui-button ui-button-danger"></button>-->
+                            </div>
+                        </div>
+                        <hr size="1px" align="left" color="#d9dad9">
+                    </div>
+                </ng-template>
+
+            </p-dataView>
+        </div>
+    </div>
+</div>

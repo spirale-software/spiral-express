@@ -1,0 +1,86 @@
+<!--
+-->
+<div>
+    <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+    <p-dialog [(visible)]="isLoading" [modal]="true" [closable]="false">
+            <p-progressSpinner [style]="{width: '50px', height: '50px'}" fill="#EEEEEE" animationDuration=".5s"></p-progressSpinner>
+    </p-dialog>
+
+    <p-toast></p-toast>
+
+
+
+    <ng-template [ngIf]="!isOpenLikeDialog">
+        <app-breadcrumb [breadcrumbItems]="breadcrumbItems"></app-breadcrumb>
+    </ng-template>
+
+    <div class="card card-w-title main-content">
+        <ng-template [ngIf]="!isOpenLikeDialog">
+            <div class="p-grid p-align-center">
+                <div class="p-col-9"><span style="font-size: 21px; font-weight: bold">Liste des clients</span></div>
+                <div class="p-col-3 small-screen-hide">
+                    <p-button label="Créer un nouveau client" icon="pi pi-plus"
+                              [routerLink]="['/clients/creer']"></p-button>
+                </div>
+                <div class="p-col-3 big-screen-hide">
+                    <p-button icon="pi pi-plus" [routerLink]="['/clients/creer']"></p-button>
+                </div>
+            </div>
+        </ng-template>
+
+        <div>
+            <p-dataView #dv [value]="clients" [paginator]="true" [rows]="10" paginatorPosition="bottom" emptyMessage="Aucun résultat">
+                <ng-template let-client pTemplate="listItem">
+                    <div class="p-col-12">
+                        <div class="p-grid p-ai-center">
+                            <div class="p-col-12 p-md-9" (click)="showUpdate(client)">
+                                <div>
+                                <span
+                                    style="display: block; font-size: 18px; font-weight: bold">{{ client?.prenom }} {{ client?.nom }}</span>
+                                    <div>
+                                    <span
+                                        style="display: inline-block; padding: 7px 0px; padding-right: 11px">Tel: <strong>{{ client?.telephone }}</strong></span>
+                                        <span
+                                            style="display: inline-block; padding: 7px 0px; padding-right: 11px">Email: <strong>{{ client?.email }}</strong></span>
+                                    </div>
+                                    <div>
+                                    <span
+                                        style="display: inline-block; padding: 7px 0px; padding-right: 11px">Pays: <strong>{{ client?.adresse?.pays }}</strong></span>
+                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px">Ville: <strong>{{ client?.adresse?.ville }}</strong></span>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="p-md-3">
+                                <ng-template [ngIf]="!isOpenLikeDialog">
+                                    <div>
+                                        <button pButton label="Destinataires" icon="fa fa-users"
+                                                (click)="navigateTo(client)" style="margin-right: 7px"></button>
+
+                                        <button pButton label="Modifier" icon="fa fa-pencil" style="margin-right: 7px"
+                                                class="ui-button ui-button-warning small-screen-hide"
+                                                [routerLink]="['/clients', client.id, 'modifier']"></button>
+
+                                        <button pButton label="Supprimer" icon="fa fa-trash"
+                                                class="ui-button ui-button-danger small-screen-hide"
+                                                (click)="confirmerSuppression(client)"></button>
+                                    </div>
+                                </ng-template>
+                                <ng-template [ngIf]="isOpenLikeDialog">
+                                    <button pButton label="Selectionner" icon="pi pi-arrow-down"
+                                            (click)="selectClient(client)">
+                                    </button>
+                                </ng-template>
+
+                            </div>
+                        </div>
+                        <hr size="1px" align="left" color="#d9dad9">
+                    </div>
+                </ng-template>
+
+            </p-dataView>
+        </div>
+    </div>
+</div>

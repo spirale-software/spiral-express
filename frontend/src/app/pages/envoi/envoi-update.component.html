@@ -1,0 +1,203 @@
+<!--
+-->
+
+<p-dialog [header]="titreDialog" [(visible)]="isVisible" [modal]="true" [style]="{'width':'90%'}">
+
+    <ng-template [ngIf]="displayEnvoiDetail">
+        <app-envoi-detail [isOpenLikeDialog]="true" [envoi]="envoi"></app-envoi-detail>
+    </ng-template>
+    <ng-template [ngIf]="displayPersonneDetail">
+        <app-personne-detail></app-personne-detail>
+    </ng-template>
+    <ng-template [ngIf]="displayExpediteurs">
+        <app-personne-select [isExpediteur]="true" (onSelect)="onExpediteurSelect($event)"></app-personne-select>
+    </ng-template>
+    <ng-template [ngIf]="displayDestinataires">
+        <app-personne-select [isDestinataire]="true"
+                             [clientId]="expediteur.id"
+                             (onSelect)="onDestinataireSelect($event)">
+        </app-personne-select>
+    </ng-template>
+    <ng-template [ngIf]="displayPartenaires">
+        <app-personne-select [isPartenaire]="true" (onSelect)="onPartenaireSelect($event)"></app-personne-select>
+    </ng-template>
+
+    <p-footer>
+        <div>
+            <button pButton label="Quitter" class="ui-button-secondary" style="margin-right: 7px"
+                    icon="fa fa-times" (click)="closeDialog()">
+            </button>
+            <ng-template [ngIf]="displayEnvoiDetail">
+                <button pButton label="Valider cet envoi" icon="fa fa-save" (click)="validerEnvoi()"></button>
+            </ng-template>
+        </div>
+    </p-footer>
+</p-dialog>
+
+<div [formGroup]="envoiForm">
+    <app-breadcrumb [breadcrumbItems]="breadcrumbItems"></app-breadcrumb>
+
+    <div class="card card-w-title main-content">
+        <div class="p-grid">
+            <div class="p-col-12 p-md-9"><h1>Encodage d'un nouvel envoi</h1></div>
+        </div>
+
+        <div style="margin-bottom: 35px">
+            <div style="margin-bottom: 21px" *ngIf="envoi && envoi.reference">
+                <span style="font-weight: bold; font-size: 18px"> {{ envoi?.reference }} </span>
+            </div>
+
+            <div class="p-grid" style="margin-bottom: 15px">
+                <div class="p-col">
+                    <span style="display: block">Date</span>
+                    <span>{{ currentDate }}</span>
+                </div>
+                <div class="p-col">
+                    <span style="display: block">Statut</span>
+                    <span>Pris en charge</span>
+                </div>
+<!--                <div class="p-col p-md-2">-->
+<!--                    <span style="display: block">Référence</span>-->
+<!--                    <span>3345567899</span>-->
+<!--                </div>-->
+            </div>
+
+            <!--[Coli]-->
+            <div>
+                <span>Coli</span>
+                <hr size="1px" width="70%" align="left" color="#d9dad9">
+
+                <div class="p-grid">
+                    <div class="p-col">
+                        <div class="ui-fluid"><span>Description coli</span></div>
+                        <textarea pInputTextarea [rows]="3" [cols]="35" [formControl]="envoiForm.get('coli').get('description')"></textarea>
+                    </div>
+                </div>
+
+                <div class="p-grid" style="margin-bottom: 11px">
+                    <div class="p-col p-md-2">
+                        <div class="ui-fluid"><span>Longueur</span></div>
+                        <div class="ui-inputgroup">
+                            <input type="text" pInputText placeholder="Longueur" [formControl]="envoiForm.get('coli').get('longueur')">
+                            <span class="ui-inputgroup-addon">m</span>
+                        </div>
+                    </div>
+                    <div class="p-col p-md-2">
+                        <div class="ui-fluid"><span>Largeur</span></div>
+                        <div class="ui-inputgroup">
+                            <input type="text" pInputText placeholder="Largeur" [formControl]="envoiForm.get('coli').get('largeur')">
+                            <span class="ui-inputgroup-addon">m</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-grid" style="margin-bottom: 11px">
+                    <div class="p-col p-md-2">
+                        <div class="ui-fluid"><span>Hauteur</span></div>
+                        <div class="ui-inputgroup">
+                            <input type="text" pInputText placeholder="Hauteur" [formControl]="envoiForm.get('coli').get('hauteur')">
+                            <span class="ui-inputgroup-addon">m</span>
+                        </div>
+                    </div>
+                    <div class="p-col p-md-2">
+                        <div class="ui-fluid"><span>Poids coli</span></div>
+                        <div class="ui-inputgroup">
+                            <input type="text" pInputText placeholder="Poids" [formControl]="envoiForm.get('coli').get('poids')">
+                            <span class="ui-inputgroup-addon">kg</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-grid" style="margin-bottom: 11px">
+                    <div class="p-col p-md-2">
+                        <div class="ui-fluid">Poids volumétrique</div>
+                        <div class="ui-inputgroup">
+                            <input type="text" pInputText disabled [value]="poidsVolumetrique">
+                            <span class="ui-inputgroup-addon">kg/m³</span>
+                        </div>
+                    </div>
+                    <div class="p-col p-md-2">
+                        <div class="ui-fluid">Volume</div>
+                        <div class="ui-inputgroup">
+                            <input type="text" pInputText disabled [value]="volume">
+                            <span class="ui-inputgroup-addon">m³</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--[Expéditeur]-->
+            <div style="margin-bottom: 35px">
+                <span>Coordonnées de l'expéditeur & du destinataire</span>
+                <hr size="1px" width="70%" align="left" color="#d9dad9">
+                <div style="margin-bottom: 15px">
+                    <div style="margin-top: 15px"><span>Expéditeur</span></div>
+                    <div class="p-inputgroup">
+                        <input type="text" pInputText formControlName="expediteur">
+                        <button type="button" pButton pRipple icon="pi pi-search" styleClass="p-button-danger"
+                                (click)="onSearchExpediteurClicked()">
+                        </button>
+                        <button type="button" pButton pRipple icon="pi pi-eye" style="background-color: #00ffff"
+                                (click)="voirDetailExpediteur()">
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="ui-fluid">Destinataire</div>
+                    <div class="p-inputgroup">
+                        <input type="text" pInputText formControlName="destinataire">
+                        <button type="button" pButton pRipple icon="pi pi-search" styleClass="p-button-danger"
+                                (click)="onSearchDestinataireClicked()">
+                        </button>
+                        <button type="button" pButton pRipple icon="pi pi-eye" style="background-color: #00ffff"
+                                (click)="voirDetailDestinataire()">
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <span>Rapport de quai & livraison</span>
+                <hr size="1px" width="70%" align="left" color="#d9dad9">
+            <div class="p-grid">
+                <div class="p-col p-md-4">
+                    <div class="ui-fluid"><span>Rapport de quai</span></div>
+                    <textarea pInputTextarea [rows]="3" [cols]="35" formControlName="rapportQuai"></textarea>
+                </div>
+                <div class="p-col">
+                    <div class="ui-fluid"><span>Rapport de livraison</span></div>
+                    <textarea pInputTextarea [rows]="3" [cols]="35" formControlName="rapportLivraison"></textarea>
+                </div>
+            </div>
+            </div>
+
+            <div style="margin-top: 11px">
+                <span>Partenaire</span>
+                <hr size="1px" width="70%" align="left" color="#d9dad9">
+                <div style="margin-top: 15px"><span>Partenaire réceptioniste du coli</span></div>
+                <div class="p-inputgroup">
+                    <input type="text" pInputText formControlName="partenaire">
+                    <button type="button" pButton pRipple icon="pi pi-search" styleClass="p-button-danger"
+                            (click)="onSearchPartenaireClicked()">
+                    </button>
+                    <button type="button" pButton pRipple icon="pi pi-eye" style="background-color: #00ffff"
+                            (click)="voirDetailPartenaire()">
+                    </button>
+                </div>
+            </div>
+
+
+            <div style="margin-top: 35px">
+                <div class="ui-fluid">Montant total à payer pour cet envoi</div>
+                <div class="ui-inputgroup">
+                    <input type="text" pInputText placeholder="Prix" formControlName="montant">
+                    <span class="ui-inputgroup-addon">EUR</span>
+                </div>
+            </div>
+        </div>
+
+        <app-button-group (retourClicked)="back()" (validerClicked)="onValiderClicked()"></app-button-group>
+    </div>
+</div>

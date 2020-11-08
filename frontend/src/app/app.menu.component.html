@@ -1,0 +1,20 @@
+<div class="layout-menu-wrapper" [class.layout-menu-dark]="app.darkMenu" (click)="onWrapperClick($event)">
+        <div class="layout-menu-container">
+<!--            <div class="mobile-search">-->
+<!--                <i class="fa fa-fw fa-search topbar-search-icon"></i>-->
+<!--                <input type="text" class="topbar-search" placeholder="Type your search here"/>-->
+<!--            </div>-->
+
+            <div style="padding-bottom: 15px">
+                <span style="padding-left: 11px; font-size: 18px; color: white; font-weight: bold">
+                    <i class="fa fa-building" aria-hidden="true"></i>
+                    Universal-transit
+                </span>
+            </div>
+
+            <ul class="layout-menu">
+                <li app-menuitem *ngFor="let item of model; let i = index;" [item]="item" [index]="i" [root]="true"></li>
+            </ul>
+        </div>
+</div>
+
