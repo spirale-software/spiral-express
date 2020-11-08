@@ -1,6 +1,7 @@
 package com.spiral.express.dto;
 
-import io.spiral.express.jhipster.domain.enumeration.StatutEnvoi;
+
+import com.spiral.express.domain.enumeration.StatutEnvoi;
 
 import java.time.ZonedDateTime;
 

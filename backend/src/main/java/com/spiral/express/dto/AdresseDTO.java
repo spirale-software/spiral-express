@@ -1,6 +1,7 @@
 package com.spiral.express.dto;
 
-import io.spiral.express.jhipster.domain.enumeration.Pays;
+
+import com.spiral.express.domain.enumeration.Pays;
 
 public class AdresseDTO {
     private Long id;

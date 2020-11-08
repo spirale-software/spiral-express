@@ -1,7 +1,7 @@
 package com.spiral.express.web.rest;
 
-import io.spiral.express.app.dto.DestinataireDTO;
-import io.spiral.express.app.service.DestinataireAppService;
+import com.spiral.express.dto.DestinataireDTO;
+import com.spiral.express.service.DestinataireAppService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;

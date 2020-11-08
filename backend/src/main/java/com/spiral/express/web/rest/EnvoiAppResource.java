@@ -1,8 +1,8 @@
 package com.spiral.express.web.rest;
 
-import io.spiral.express.app.dto.EnvoiDTO;
-import io.spiral.express.app.service.EnvoiAppService;
-import io.spiral.express.app.service.GenerationFicheEnvoiAppService;
+import com.spiral.express.dto.EnvoiDTO;
+import com.spiral.express.service.EnvoiAppService;
+import com.spiral.express.service.GenerationFicheEnvoiAppService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;

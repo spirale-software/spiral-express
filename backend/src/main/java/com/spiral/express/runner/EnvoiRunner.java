@@ -1,8 +1,8 @@
 package com.spiral.express.runner;
 
-import io.spiral.express.app.repository.*;
-import io.spiral.express.jhipster.domain.*;
-import io.spiral.express.jhipster.domain.enumeration.StatutEnvoi;
+import com.spiral.express.domain.*;
+import com.spiral.express.domain.enumeration.StatutEnvoi;
+import com.spiral.express.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
