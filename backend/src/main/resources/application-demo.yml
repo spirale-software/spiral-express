@@ -1,0 +1,36 @@
+# ===================================================================
+# Spring Boot configuration for the "demo" profile.
+# ===================================================================
+
+logging:
+  level:
+    ROOT: DEBUG
+    com.spiral.express: DEBUG
+
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://ls-5ded689eeb39e1716cc8091ff2715f886456297a.chmk4p6etfq4.eu-west-3.rds.amazonaws.com:5432/dbmaster
+    username: dbmasteruser
+    password: ChangeMe.
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernates:
+        temp:
+          use_jdbc_metadata_defaults: false
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: gyleentrepreneur@gmail.com
+    password: entrepreneur1989
+  messages:
+    cache-duration: PT1S # 1 second, see the ISO 8601 standard
+
+server:
+  port: 5000
+
+# application:
