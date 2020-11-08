@@ -10,5 +10,7 @@ public class SpiralExpressApp {
     public static void main(String... args) {
         SpringApplication app = new SpringApplication(SpiralExpressApp.class);
         Environment env = app.run(args).getEnvironment();
+
+        System.out.println("Application started successfully!");
     }
 }
