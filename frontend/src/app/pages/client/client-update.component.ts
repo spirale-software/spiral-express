@@ -22,23 +22,32 @@ export class ClientUpdateComponent implements OnInit {
 
     clientId;
 
+    titre;
+
     constructor(private clientService: ClientService, private fb: FormBuilder,
                 private confirmationService: ConfirmationService, private router: Router,
                 private route: ActivatedRoute) {
 
         this.breadcrumbItems = [];
         this.breadcrumbItems.push({label: 'Clients'});
-        this.breadcrumbItems.push({label: 'créer nouveau client'});
+
 
         this.initForm();
         this.client = {};
         this.paysOptions = Utils.getPaysOptions();
+        this.titre = "Création d'un nouveau client";
 
         this.clientId = this.route.snapshot.paramMap.get('id');
+        if (this.clientId) {
+            this.breadcrumbItems.push({label: 'Modification d\'un client'});
+        } else {
+            this.breadcrumbItems.push({label: 'Création nouveau client'});
+        }
     }
 
     ngOnInit(): void {
         if (this.clientId) {
+            this.titre = 'Modification d\'un client';
             this.clientService.findById(this.clientId).subscribe(res => {
                 console.log('findById: ', res.body);
                 this.clientForm.patchValue(res.body);
