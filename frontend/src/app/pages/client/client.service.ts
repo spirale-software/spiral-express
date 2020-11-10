@@ -23,7 +23,7 @@ export class ClientService {
     }
 
     findById(clientId: number): Observable<HttpResponse<Client>> {
-        return this.http.get<Client>(this.url, {observe: 'response'});
+        return this.http.get<Client>(`${this.url}/${clientId}`, {observe: 'response'});
     }
 
     deleteById(clientId: number): Observable<any> {

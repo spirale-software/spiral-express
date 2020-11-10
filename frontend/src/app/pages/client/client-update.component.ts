@@ -3,7 +3,7 @@ import {ConfirmationService, MenuItem, SelectItem} from "primeng";
 import {ClientService} from "./client.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Utils} from "../shared/util/utils";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
     selector: 'app-client-update',
@@ -20,8 +20,11 @@ export class ClientUpdateComponent implements OnInit {
 
     paysOptions: SelectItem[];
 
+    clientId;
+
     constructor(private clientService: ClientService, private fb: FormBuilder,
-                private confirmationService: ConfirmationService, private router: Router) {
+                private confirmationService: ConfirmationService, private router: Router,
+                private route: ActivatedRoute) {
 
         this.breadcrumbItems = [];
         this.breadcrumbItems.push({label: 'Clients'});
@@ -30,9 +33,17 @@ export class ClientUpdateComponent implements OnInit {
         this.initForm();
         this.client = {};
         this.paysOptions = Utils.getPaysOptions();
+
+        this.clientId = this.route.snapshot.paramMap.get('id');
     }
 
     ngOnInit(): void {
+        if (this.clientId) {
+            this.clientService.findById(this.clientId).subscribe(res => {
+                console.log('findById: ', res.body);
+                this.clientForm.patchValue(res.body);
+            });
+        }
     }
 
     back(): void {

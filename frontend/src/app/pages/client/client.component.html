@@ -3,8 +3,8 @@
 <div>
     <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 
-    <p-dialog [(visible)]="isLoading" [modal]="true" [closable]="false">
-            <p-progressSpinner [style]="{width: '50px', height: '50px'}" fill="#EEEEEE" animationDuration=".5s"></p-progressSpinner>
+    <p-dialog [(visible)]="isLoading" [modal]="true" [closable]="false" [showHeader]="false">
+            <p-progressSpinner></p-progressSpinner>
     </p-dialog>
 
     <p-toast></p-toast>

@@ -33,9 +33,9 @@ public class ClientAppResource {
     }
 
     @GetMapping("clients/{id}")
-    public ResponseEntity<ClientDTO> getById(@PathVariable Long clientId) {
-        log.info("Requête REST pour obtenir un client avec pour id: {}", clientId);
-        return ResponseEntity.ok(clientAppService.findById(clientId));
+    public ResponseEntity<ClientDTO> getById(@PathVariable Long id) {
+        log.info("Requête REST pour obtenir un client avec pour id: {}", id);
+        return ResponseEntity.ok(clientAppService.findById(id));
     }
 
     @GetMapping("clients")
