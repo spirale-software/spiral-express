@@ -43,12 +43,13 @@ public class GenerationFicheEnvoiAppServiceAppImpl implements GenerationFicheEnv
 
         File file = null;
         try {
-            file = ResourceUtils.getFile("classpath:templates");
+            file = ResourceUtils.getFile("classpath:templates/envoi.ftl");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            log.error("Le fichier \"classpath:templates\" n'a pas pu être trouvé");
         }
         String fileName = "envoi.ftl";
-        String html = FreemarkerUtils.loadFtlHtml(file, fileName, getVariables(envoi));
+        String html = FreemarkerUtils.loadFtlHtml(file.getParentFile(), fileName, getVariables(envoi));
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         try {
@@ -65,6 +66,7 @@ public class GenerationFicheEnvoiAppServiceAppImpl implements GenerationFicheEnv
             qrCodeFile = ResourceUtils.getFile("classpath:qrcode/qrcode-01.png");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            log.error("Le fichier \"classpath:qrcode/qrcode-01.png\" n'a pas pu être trouvé");
         }
 
         QrCodeUtils.genererQrCode(envoi.getReference(), qrCodeFile.getPath());
