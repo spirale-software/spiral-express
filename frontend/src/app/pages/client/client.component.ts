@@ -3,11 +3,12 @@ import {ConfirmationService, DynamicDialogRef, MenuItem, MessageService} from "p
 import {ClientService} from "./client.service";
 import {Router} from "@angular/router";
 import {Client} from "../shared/model/client";
+import {MessageUtilService} from "../shared/util/message-util.service";
 
 @Component({
     selector: 'app-client',
     templateUrl: './client.component.html',
-    providers: [ConfirmationService, MessageService]
+    providers: [ConfirmationService]
 })
 export class ClientComponent implements OnInit {
 
@@ -22,26 +23,20 @@ export class ClientComponent implements OnInit {
     constructor(private clientService: ClientService,
                 @Optional() private ref: DynamicDialogRef,
                 private confirmationService: ConfirmationService, private router: Router,
-                private messageService: MessageService) {
+                private messageUtilService: MessageUtilService) {
         this.breadcrumbItems = [];
         this.breadcrumbItems.push({label: 'Clients'});
         this.clients = [];
-        // this.clients = [
-        //     {id: 1, nom: 'Gérard', prenom: 'Yannick', telephone: '045888888', email: 'contact@lapiemo.com', adresse: {pays: 'Cameroun', ville: 'Douala Bassa'}},
-        //     {id: 2, nom: 'Symbol', prenom: 'Yvano', telephone: '045888888', email: 'contact@lapiemo.com', adresse: {pays: 'Tchad', ville: 'Djamena Lac'}},
-        //     {id: 3, nom: 'Stephen', prenom: 'Gustave', telephone: '00336989521', email: 'gustave@gmail.com', adresse: {pays: 'Senegal', ville: 'Dakar Centre'}},
-        // ];
     }
 
     ngOnInit(): void {
         this.isOpenLikeDialog = this.ref != null;
         this.isLoading = true;
         this.clientService.findAll().subscribe(
-            res => {
-                this.clients = res.body;
-                this.isLoading = false;
-                },
-            error => {this.isLoading = false; this.messageService.add({severity:'error', summary:'Erreur', detail:'Erreur dans la récupération des données'})},
+            res => { this.clients = res.body; },
+            error => {
+                this.messageUtilService.showErrorToaster('Erreur', 'Erreur dans la récupération des données.');
+              },
             () => this.isLoading = false);
     }
 
@@ -66,7 +61,6 @@ export class ClientComponent implements OnInit {
 
     navigateTo(client): void {
         this.router.navigate(['/destinataires/clients', client.id], {state: client});
-
     }
 }
 

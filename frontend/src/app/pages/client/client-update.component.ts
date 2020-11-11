@@ -79,7 +79,10 @@ export class ClientUpdateComponent implements OnInit {
         console.log('clientForm.value: ', this.clientForm.value);
         this.client = Object.assign(this.client, this.clientForm.value);
         this.clientService.create(this.client).subscribe(
-            res => { this.router.navigate(['/clients']); },
+            res => {
+                this.messageUtilService.showSuccessToaster('Opération réussie', 'Le client a bien été mis à jour.');
+                this.router.navigate(['/clients']);
+                },
             error => {});
         // console.log('client: ', this.client);
 
