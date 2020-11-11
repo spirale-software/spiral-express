@@ -9,6 +9,7 @@ import {BreadcrumbComponent} from "./component/breadcrumb/breadcrumb.component";
 import {PersonneUpdateComponent} from "./component/personne/personne-update.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {PersonneSelectComponent} from "./component/personne/personne-select.component";
+import {SpinnerComponent} from "./component/spinner/spinner.component";
 
 @NgModule({
     imports: [PrimengLibModule, ZXingScannerModule, CommonModule, ReactiveFormsModule],
@@ -18,10 +19,11 @@ import {PersonneSelectComponent} from "./component/personne/personne-select.comp
         PersonneDetailComponent,
         BreadcrumbComponent,
         PersonneUpdateComponent,
-        PersonneSelectComponent
+        PersonneSelectComponent,
+        SpinnerComponent
     ],
     declarations: [ButtonGroupComponent, ScannerDocumentComponent, PersonneDetailComponent, BreadcrumbComponent,
-        PersonneUpdateComponent, PersonneSelectComponent]
+        PersonneUpdateComponent, PersonneSelectComponent, SpinnerComponent]
 })
 export class SharedModule {
 }

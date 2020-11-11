@@ -33,11 +33,11 @@ export class ClientComponent implements OnInit {
         this.isOpenLikeDialog = this.ref != null;
         this.isLoading = true;
         this.clientService.findAll().subscribe(
-            res => { this.clients = res.body; },
+            res => { this.clients = res.body; this.isLoading = false;},
             error => {
+                this.isLoading = false;
                 this.messageUtilService.showErrorToaster('Erreur', 'Erreur dans la récupération des données.');
-              },
-            () => this.isLoading = false);
+              });
     }
 
     selectClient(client) {
