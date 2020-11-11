@@ -48,6 +48,9 @@ public class ClientAppServiceImpl implements ClientAppService {
     @Override
     public ClientDTO modifier(ClientDTO clientDTO) {
         log.info("Modifier un client");
+        if (clientDTO.getId() == null) {
+            throw new IllegalArgumentException("Pas de modification d'un client sans ID");
+        }
         Client client = clientAppRepository.save(clientMapper.toEntity(clientDTO));
         return clientMapper.toDto(client);
     }

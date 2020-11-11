@@ -5,6 +5,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {Utils} from "../shared/util/utils";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MessageUtilService} from "../shared/util/message-util.service";
+import {Client} from "../shared/model/client";
 
 @Component({
     selector: 'app-client-update',
@@ -17,13 +18,15 @@ export class ClientUpdateComponent implements OnInit {
 
     clientForm: FormGroup;
 
-    client: any;
+    client: Client;
 
     paysOptions: SelectItem[];
 
     clientId;
 
     titre;
+
+    isLoading = false;
 
     constructor(private clientService: ClientService, private fb: FormBuilder,
                 private confirmationService: ConfirmationService, private router: Router,
@@ -34,7 +37,7 @@ export class ClientUpdateComponent implements OnInit {
 
 
         this.initForm();
-        this.client = {};
+        this.client = {} as Client;
         this.paysOptions = Utils.getPaysOptions();
         this.titre = "Création d'un nouveau client";
 
@@ -51,7 +54,8 @@ export class ClientUpdateComponent implements OnInit {
             this.titre = 'Modification d\'un client';
             this.clientService.findById(this.clientId).subscribe(res => {
                 console.log('findById: ', res.body);
-                this.clientForm.patchValue(res.body);
+                this.client = res.body;
+                this.clientForm.patchValue(this.client);
             });
         }
     }
@@ -78,19 +82,39 @@ export class ClientUpdateComponent implements OnInit {
     enregistrer(): void {
         console.log('clientForm.value: ', this.clientForm.value);
         this.client = Object.assign(this.client, this.clientForm.value);
-        this.clientService.create(this.client).subscribe(
-            res => {
-                this.messageUtilService.showSuccessToaster('Opération réussie', 'Le client a bien été mis à jour.');
-                this.router.navigate(['/clients']);
+        console.log('client: ', this.client);
+        this.isLoading = true;
+        if (this.client.id) {
+            this.clientService
+                .update(this.client)
+                .subscribe(
+                    res => {
+                        this.isLoading = false;
+                        this.messageUtilService.showSuccessToaster('Succès', 'Le client a bien été mis à jour.');
+                        this.router.navigate(['/clients']);
+                    },
+                    error => {
+                        this.isLoading = false;
+                        this.messageUtilService.showSuccessToaster('Erreur', 'Une erreur s\'est produite lors de la mise jour du client.');
+                    });
+        } else {
+            this.clientService.create(this.client).subscribe(
+                res => {
+                    this.isLoading = false;
+                    this.messageUtilService.showSuccessToaster('Succès', 'Le client a bien été crée.');
+                    this.router.navigate(['/clients']);
                 },
-            error => {});
-        // console.log('client: ', this.client);
+                error => {
+                    this.isLoading = false;
+                    this.messageUtilService.showSuccessToaster('Erreur', 'Une erreur s\'est produite lors de la création du client.');
+                });
+        }
 
     }
 
     confirmerSuppression() {
         this.confirmationService.confirm({
-            message: 'Voulez vous vraiment supprimer le client: ' +  this.client.nom,
+            message: 'Voulez vous vraiment supprimer le client: ' + this.client.nom,
             accept: () => this.clientService.deleteById(this.client.id).subscribe(),
             acceptLabel: 'Oui',
             rejectLabel: 'Non'
