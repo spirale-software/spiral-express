@@ -14,6 +14,7 @@ import {RapportDeLivraisonComponent} from './rapport-de-livraison/rapport-de-liv
 import {DestinataireModule} from './destinataire/destinataire.module';
 import {RapportDeQuaiModule} from './rapport-de-quai/rapport-de-quai.module';
 import {LivraisonColiModule} from './livraison-coli/livraison-coli.module';
+import {MessageService} from "primeng";
 
 @NgModule({
     imports: [
@@ -34,6 +35,7 @@ import {LivraisonColiModule} from './livraison-coli/livraison-coli.module';
         ReceptionColiComponent,
         TableauDeBordComponent,
         RapportDeLivraisonComponent
-    ]
+    ],
+    providers: [MessageService]
 })
 export class PagesModule {}

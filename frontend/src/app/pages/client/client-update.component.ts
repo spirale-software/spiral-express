@@ -4,6 +4,7 @@ import {ClientService} from "./client.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Utils} from "../shared/util/utils";
 import {ActivatedRoute, Router} from "@angular/router";
+import {MessageUtilService} from "../shared/util/message-util.service";
 
 @Component({
     selector: 'app-client-update',
@@ -26,7 +27,7 @@ export class ClientUpdateComponent implements OnInit {
 
     constructor(private clientService: ClientService, private fb: FormBuilder,
                 private confirmationService: ConfirmationService, private router: Router,
-                private route: ActivatedRoute) {
+                private route: ActivatedRoute, private messageUtilService: MessageUtilService) {
 
         this.breadcrumbItems = [];
         this.breadcrumbItems.push({label: 'Clients'});
