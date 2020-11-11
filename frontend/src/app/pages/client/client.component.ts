@@ -53,10 +53,23 @@ export class ClientComponent implements OnInit {
     confirmerSuppression(client) {
         this.confirmationService.confirm({
            message: 'Voulez vous vraiment supprimer le client: ' +  client.nom,
-            accept: () => this.clientService.deleteById(client.id).subscribe(),
+            accept: () => this.supprimer(client),
             acceptLabel: 'Oui',
             rejectLabel: 'Non'
         });
+    }
+
+    supprimer(client): void {
+        this.isLoading = true;
+        this.clientService.deleteById(client.id).subscribe(
+            res => {
+                this.messageUtilService.showSuccessToaster('Succes', 'Le client a bien été supprimé');
+                this.isLoading = false
+            },
+            error => {
+                this.messageUtilService.showErrorToaster('Echec', 'Une erreur s\'est produite lors de la suppression');
+                this.isLoading = false;
+            });
     }
 
     navigateTo(client): void {
