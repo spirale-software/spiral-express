@@ -62,4 +62,10 @@ public class PartenaireAppServiceImpl implements PartenaireAppService {
             .findAll(pageable)
             .map(partenaireMapper::toDto);
     }
+
+    @Override
+    public void deleteById(Long id) {
+        log.info("Supprimer un partenaire par son id: {}", id);
+        partenaireAppRepository.deleteById(id);
+    }
 }

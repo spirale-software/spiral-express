@@ -39,4 +39,10 @@ public class PersonneAppServiceImpl implements PersonneAppService {
         personne.setAdresse(adresse);
         return personneAppRepository.save(personne);
     }
+
+    @Override
+    public void deleteById(Long id) {
+        log.info("Supprimer une personne par son ID: {}", id);
+        personneAppRepository.deleteById(id);
+    }
 }

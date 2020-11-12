@@ -5,6 +5,7 @@ import com.spiral.express.domain.Personne;
 import com.spiral.express.dto.ClientDTO;
 import com.spiral.express.repository.ClientAppRepository;
 import com.spiral.express.service.ClientAppService;
+import com.spiral.express.service.PartenaireAppService;
 import com.spiral.express.service.PersonneAppService;
 import com.spiral.express.service.error.ElementNonExistantException;
 import com.spiral.express.service.mapper.ClientMapper;
@@ -25,13 +26,16 @@ public class ClientAppServiceImpl implements ClientAppService {
     private final ClientAppRepository clientAppRepository;
     private final ClientMapper clientMapper;
     private final PersonneAppService personneAppService;
+    private final PartenaireAppService partenaireAppService;
 
     public ClientAppServiceImpl(ClientAppRepository clientAppRepository,
                                 ClientMapper clientMapper,
-                                PersonneAppService personneAppService) {
+                                PersonneAppService personneAppService,
+                                PartenaireAppService partenaireAppService) {
         this.clientAppRepository = clientAppRepository;
         this.clientMapper = clientMapper;
         this.personneAppService = personneAppService;
+        this.partenaireAppService = partenaireAppService;
     }
 
     @Override
@@ -73,6 +77,18 @@ public class ClientAppServiceImpl implements ClientAppService {
         return clientAppRepository
             .findAll(pageable)
             .map(clientMapper::toDto);
+    }
+
+    @Override
+    public void deleteById(Long clientId) {
+        log.info("Suprimer un client par son ID: {}", clientId);
+        Client client = clientAppRepository
+                .findById(clientId)
+                .orElseThrow(() -> new ElementNonExistantException("Pas de client avec cet ID: " + clientId));
+
+        client.getDestinataires().forEach(item -> partenaireAppService.deleteById(item.getId()));
+        personneAppService.deleteById(client.getPersonne().getId());
+        clientAppRepository.deleteById(client.getId());
     }
 
     private ClientDTO creerClient(ClientDTO clientDTO) {

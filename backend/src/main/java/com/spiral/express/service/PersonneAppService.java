@@ -9,4 +9,6 @@ public interface PersonneAppService {
     Personne sauver(PersonneDTO personneDTO);
 
     Personne sauver(Personne personne);
+
+    void deleteById(Long id);
 }

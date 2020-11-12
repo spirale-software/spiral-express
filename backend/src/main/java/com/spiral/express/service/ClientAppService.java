@@ -12,4 +12,6 @@ public interface ClientAppService {
     ClientDTO findById(Long id);
 
     Page<ClientDTO> findAll();
+
+    void deleteById(Long clientId);
 }

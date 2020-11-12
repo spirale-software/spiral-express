@@ -43,4 +43,11 @@ public class ClientAppResource {
         log.info("Requête REST pour obtenir tous les clients");
         return ResponseEntity.ok(clientAppService.findAll().getContent());
     }
+
+    @DeleteMapping("clients/{clientId}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long clientId) {
+        log.info("Supprimer un client par son id: {}", clientId);
+        clientAppService.deleteById(clientId);
+        return ResponseEntity.noContent().build();
+    }
 }

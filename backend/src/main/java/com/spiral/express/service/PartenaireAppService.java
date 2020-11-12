@@ -13,4 +13,6 @@ public interface PartenaireAppService {
     PartenaireDTO findById(Long id);
 
     Page<PartenaireDTO> findAll();
+
+    void deleteById(Long id);
 }
