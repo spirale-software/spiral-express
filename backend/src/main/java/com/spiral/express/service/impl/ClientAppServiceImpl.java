@@ -37,13 +37,16 @@ public class ClientAppServiceImpl implements ClientAppService {
     @Override
     public ClientDTO sauver(ClientDTO clientDTO) {
         log.info("Sauver un nouveau client");
+
+        if (clientDTO.getId() != null) {
+            throw new IllegalArgumentException("Un nouveau client ne peut pas déjà avoir un ID");
+        }
         clientDTO.setNumero(new Random().nextLong());
-        Client client = clientMapper.toEntity(clientDTO);
-        Personne personne = personneAppService.sauver(client.getPersonne());
-        client.setPersonne(personne);
-        client = clientAppRepository.save(client);
-        return clientMapper.toDto(client);
+
+        return creerClient(clientDTO);
     }
+
+
 
     @Override
     public ClientDTO modifier(ClientDTO clientDTO) {
@@ -51,8 +54,7 @@ public class ClientAppServiceImpl implements ClientAppService {
         if (clientDTO.getId() == null) {
             throw new IllegalArgumentException("Pas de modification d'un client sans ID");
         }
-        Client client = clientAppRepository.save(clientMapper.toEntity(clientDTO));
-        return clientMapper.toDto(client);
+        return creerClient(clientDTO);
     }
 
     @Override
@@ -71,5 +73,13 @@ public class ClientAppServiceImpl implements ClientAppService {
         return clientAppRepository
             .findAll(pageable)
             .map(clientMapper::toDto);
+    }
+
+    private ClientDTO creerClient(ClientDTO clientDTO) {
+        Client client = clientMapper.toEntity(clientDTO);
+        Personne personne = personneAppService.sauver(client.getPersonne());
+        client.setPersonne(personne);
+        client = clientAppRepository.save(client);
+        return clientMapper.toDto(client);
     }
 }
