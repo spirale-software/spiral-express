@@ -40,6 +40,10 @@ export class ClientComponent implements OnInit {
               });
     }
 
+    resetClients(): void {
+        this.clientService.findAll().subscribe(res => this.clients = res.body);
+    }
+
     selectClient(client) {
         this.ref.close(client);
     }
@@ -65,6 +69,7 @@ export class ClientComponent implements OnInit {
             res => {
                 this.messageUtilService.showSuccessToaster('Succes', 'Le client a bien été supprimé');
                 this.isLoading = false
+                this.resetClients();
             },
             error => {
                 this.messageUtilService.showErrorToaster('Echec', 'Une erreur s\'est produite lors de la suppression');
