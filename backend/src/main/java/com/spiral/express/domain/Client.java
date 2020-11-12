@@ -26,6 +26,9 @@ public class Client implements Serializable {
     @Column(name = "numero")
     private Long numero;
 
+    @Column(name = "actif", columnDefinition = "boolean default true")
+    private Boolean actif;
+
     @OneToOne
     @JoinColumn(unique = true)
     private Personne personne;
@@ -34,7 +37,6 @@ public class Client implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
     private Set<Destinataire> destinataires = new HashSet<>();
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -93,7 +95,14 @@ public class Client implements Serializable {
     public void setDestinataires(Set<Destinataire> destinataires) {
         this.destinataires = destinataires;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
+
+    public Boolean getActif() {
+        return actif;
+    }
+
+    public void setActif(Boolean actif) {
+        this.actif = actif;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -111,7 +120,6 @@ public class Client implements Serializable {
         return 31;
     }
 
-    // prettier-ignore
     @Override
     public String toString() {
         return "Client{" +
