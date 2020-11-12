@@ -1,4 +1,5 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, EventEmitter, OnInit, Output} from "@angular/core";
+import {LoginService} from "../login/login.service";
 
 @Component({
     selector: 'app-accueil',
@@ -7,7 +8,9 @@ import {Component, OnInit} from "@angular/core";
 export class AccueilComponent implements OnInit {
     displayLoginDialog = false;
 
-    constructor() {}
+    @Output() authentication = new EventEmitter<boolean>();
+
+    constructor(private loginService: LoginService) {}
 
     ngOnInit(): void {
     }
@@ -16,9 +19,15 @@ export class AccueilComponent implements OnInit {
         this.displayLoginDialog = true;
     }
 
-    connecter() {
+    connecter(login, password) {
         this.displayLoginDialog = false;
-        setTimeout(() => localStorage.setItem('isAuthenticated', 'true'), 500);
+        this.loginService
+            .login(login, password)
+            .subscribe(
+                res => { this.authentication.emit(res) },
+                error => { this.authentication.emit(false); });
+
+        // setTimeout(() => localStorage.setItem('isAuthenticated', 'true'), 500);
 
     }
 }
