@@ -34,19 +34,19 @@
             <span>Email</span><br>
             <div class="ui-inputgroup">
                 <span class="ui-inputgroup-addon"><i class="pi pi-user" style="line-height: 1.25;"></i></span>
-                <input type="text" pInputText placeholder="Nom d'utilisateur" style="width: 175px">
+                <input type="text" #login pInputText placeholder="Nom d'utilisateur" style="width: 175px">
             </div>
         </div>
         <div>
             <span>Mot de passe</span><br>
             <div class="ui-inputgroup">
                 <span class="ui-inputgroup-addon"><i class="fa fa-unlock-alt" style="line-height: 1.25;"></i></span>
-                <input type="text" pInputText placeholder="Mot de passe" style="width: 175px">
+                <input type="text" #password pInputText placeholder="Mot de passe" style="width: 175px">
             </div>
         </div>
     </div>
     <p-footer>
-        <p-button icon="pi pi-check" (click)="connecter()" label="Se connecter" styleClass="p-button-text"></p-button>
+        <p-button icon="pi pi-check" (click)="connecter(login.value, password.value)" label="Se connecter" styleClass="p-button-text"></p-button>
         <p-button icon="pi pi-times" (click)="displayLoginDialog=false" label="Quitter" [class]="'ui-button ui-button-secondary'"></p-button>
     </p-footer>
 </p-dialog>
