@@ -41,15 +41,18 @@ export class AppComponent {
 
     menuHoverActive: boolean;
 
+    isAuth = false;
+
     constructor(public renderer: Renderer2, private menuService: MenuService, private router: Router) {localStorage.setItem('isAuthenticated', 'false');}
 
     isAuthenticated(): boolean {
-        const value = localStorage.getItem('isAuthenticated');
+       return this.isAuth;
+    }
 
-        if (value === 'true' && this.router.isActive('', true)) {
-            this.router.navigate(['tableau-de-bord']);
-        }
-        return value === 'true';
+    onAuthentication(auth): void {
+        console.log('onAuthentication: ', auth);
+        setTimeout(() => this.isAuth = auth, 200);
+       // this.isAuth = auth;
     }
 
     onLayoutClick() {

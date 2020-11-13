@@ -14,7 +14,12 @@ import {RAPPORT_DE_QUAI_ROUTES} from './rapport-de-quai/rapport-de-quai.route';
 export const PAGES_ROUTES: Routes = [
     {
         path: '',
-        component: AccueilComponent
+        component: AccueilComponent,
+        outlet: 'fake'
+    },
+    {
+        path: '',
+        component: TableauDeBordComponent
     },
     {
         path: 'tableau-de-bord',
