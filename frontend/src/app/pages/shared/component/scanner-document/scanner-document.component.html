@@ -7,7 +7,7 @@
         <button pButton label="Scanner le document" (click)="onScannerClicked()"></button>
     </div>
     <ng-template [ngIf]="isScannerAllowed">
-        <zxing-scanner (scanSuccess)="onScanOK($event)"
+        <zxing-scanner (scanSuccess)="onScanOK($event)" (autostarting)="test()"
                        [formats]="['QR_CODE', 'EAN_13', 'CODE_128', 'DATA_MATRIX']">
         </zxing-scanner>
     </ng-template>

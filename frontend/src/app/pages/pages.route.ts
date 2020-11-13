@@ -10,6 +10,7 @@ import {LoginComponent} from './login/login.component';
 import {RapportDeLivraisonComponent} from './rapport-de-livraison/rapport-de-livraison.component';
 import {DESTINATAIRE_ROUTES} from './destinataire/destinataire.route';
 import {RAPPORT_DE_QUAI_ROUTES} from './rapport-de-quai/rapport-de-quai.route';
+import {ScanQrcodeComponent} from "./scan-qrcode/scan-qrcode.component";
 
 export const PAGES_ROUTES: Routes = [
     {
@@ -28,6 +29,10 @@ export const PAGES_ROUTES: Routes = [
     {
         path: 'login',
         component: LoginComponent
+    },
+    {
+        path: 'scanner-qrcode',
+        component: ScanQrcodeComponent
     },
     {
         path: 'rapport-de-livraison',

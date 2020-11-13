@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Output} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 
 @Component({
     selector: 'app-scanner-document',
     templateUrl: './scanner-document.component.html'
 })
 export class ScannerDocumentComponent {
-    isScannerAllowed = false;
+    @Input() isScannerAllowed = false;
 
     @Output() scanSuccess = new EventEmitter<number>();
 
@@ -20,5 +20,9 @@ export class ScannerDocumentComponent {
     onScanOK(reference): void {
         this.scanSuccess.emit(reference);
         console.log('onScanOK: ', reference);
+    }
+
+    test() {
+        console.log("test");
     }
 }

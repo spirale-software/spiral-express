@@ -15,6 +15,7 @@ import {DestinataireModule} from './destinataire/destinataire.module';
 import {RapportDeQuaiModule} from './rapport-de-quai/rapport-de-quai.module';
 import {LivraisonColiModule} from './livraison-coli/livraison-coli.module';
 import {MessageService} from "primeng";
+import {ScanQrcodeComponent} from "./scan-qrcode/scan-qrcode.component";
 
 @NgModule({
     imports: [
@@ -34,6 +35,7 @@ import {MessageService} from "primeng";
         LoginComponent,
         ReceptionColiComponent,
         TableauDeBordComponent,
+        ScanQrcodeComponent,
         RapportDeLivraisonComponent
     ],
     providers: [MessageService]
