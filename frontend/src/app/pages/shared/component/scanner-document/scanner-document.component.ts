@@ -19,10 +19,5 @@ export class ScannerDocumentComponent {
 
     onScanOK(reference): void {
         this.scanSuccess.emit(reference);
-        console.log('onScanOK: ', reference);
-    }
-
-    test() {
-        console.log("test");
     }
 }
