@@ -1,4 +1,5 @@
 import {Component, OnInit} from "@angular/core";
+import {Router} from "@angular/router";
 
 @Component({
     selector: '',
@@ -9,13 +10,13 @@ import {Component, OnInit} from "@angular/core";
 })
 export class ScanQrcodeComponent implements OnInit {
 
-    constructor() {
+    constructor(private router: Router) {
     }
 
     ngOnInit(): void {
     }
 
     onScanSuccess(reference): void {
-
+        this.router.navigate(['/envois', reference, 'detail']);
     }
 }
