@@ -7,11 +7,15 @@ import com.spiral.express.domain.Personne;
 import com.spiral.express.repository.EnvoiAppRepository;
 import com.spiral.express.service.GenerationFicheEnvoiAppService;
 import com.spiral.express.service.error.ElementNonExistantException;
+import com.spiral.express.service.error.GenerationFicheEnvoiException;
 import com.spiral.express.utils.EnvoiTemplateVars;
 import com.spiral.express.utils.FreemarkerUtils;
 import com.spiral.express.utils.QrCodeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ResourceUtils;
@@ -19,6 +23,7 @@ import org.springframework.util.ResourceUtils;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,6 +33,9 @@ public class GenerationFicheEnvoiAppServiceAppImpl implements GenerationFicheEnv
     private Logger log = LoggerFactory.getLogger(getClass());
 
     private final EnvoiAppRepository envoiAppRepository;
+
+    @Autowired
+    private ResourceLoader resourceLoader;
 
     public GenerationFicheEnvoiAppServiceAppImpl(EnvoiAppRepository envoiAppRepository) {
         this.envoiAppRepository = envoiAppRepository;
@@ -43,10 +51,11 @@ public class GenerationFicheEnvoiAppServiceAppImpl implements GenerationFicheEnv
 
         File file = null;
         try {
-            file = ResourceUtils.getFile("classpath:templates/envoi.ftl");
-        } catch (FileNotFoundException e) {
+            file = resourceLoader.getResource("classpath:templates").getFile();
+        } catch (Exception e) {
             e.printStackTrace();
             log.error("Le fichier \"classpath:templates\" n'a pas pu être trouvé");
+            throw new GenerationFicheEnvoiException("Erreur lors du chargement du repertoire 'templates'");
         }
         String fileName = "envoi.ftl";
         String html = FreemarkerUtils.loadFtlHtml(file.getParentFile(), fileName, getVariables(envoi));
@@ -63,10 +72,11 @@ public class GenerationFicheEnvoiAppServiceAppImpl implements GenerationFicheEnv
     private Map<String, String> getVariables(Envoi envoi) {
         File qrCodeFile = null;
         try {
-            qrCodeFile = ResourceUtils.getFile("classpath:qrcode/qrcode-01.png");
-        } catch (FileNotFoundException e) {
+            qrCodeFile = resourceLoader.getResource("classpath:qrcode/qrcode-01.png").getFile();
+        } catch (Exception e) {
             e.printStackTrace();
             log.error("Le fichier \"classpath:qrcode/qrcode-01.png\" n'a pas pu être trouvé");
+            throw new GenerationFicheEnvoiException("Erreur lor du chargement de la resource 'qrcode/qrcode-01.png");
         }
 
         QrCodeUtils.genererQrCode(envoi.getReference(), qrCodeFile.getPath());

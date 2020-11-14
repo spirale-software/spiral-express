@@ -99,6 +99,7 @@ public class ClientAppServiceImpl implements ClientAppService {
 
     private ClientDTO creerClient(ClientDTO clientDTO) {
         Client client = clientMapper.toEntity(clientDTO);
+        client.setActif(true);
         Personne personne = personneAppService.sauver(client.getPersonne());
         client.setPersonne(personne);
         client = clientAppRepository.save(client);
