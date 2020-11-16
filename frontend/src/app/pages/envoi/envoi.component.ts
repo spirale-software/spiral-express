@@ -52,7 +52,7 @@ export class EnvoiComponent implements OnInit {
         return null;
     }
 
-    genererDocument(envoiId: null): void {
+    genererDocument(envoiId: number): void {
         this.envoiService.genererDocument(envoiId).subscribe(res => {
             console.log('genererDocument: ', res);
             const file = new Blob([res], {type: 'application/pdf'});
