@@ -4,6 +4,8 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,11 +13,14 @@ import java.io.StringWriter;
 import java.util.Map;
 
 public class FreemarkerUtils {
+    private static Logger log = LoggerFactory.getLogger(FreemarkerUtils.class);
 
     public static String loadFtlHtml(File baseDir, String fileName, Map globalMap){
-        if(baseDir == null || !baseDir.isDirectory() || globalMap ==null || fileName == null || "".equals(fileName)){
-            throw new IllegalArgumentException("Directory file");
-        }
+        log.info("baseDir: {}, fileName: {}, glabalMap: {}", baseDir, fileName, globalMap);
+
+       if(baseDir == null || !baseDir.isDirectory() || globalMap ==null || fileName == null || "".equals(fileName)) {
+           throw new IllegalArgumentException("Directory file");
+       }
 
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_22);
         try {
