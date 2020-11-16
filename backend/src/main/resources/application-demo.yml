@@ -5,7 +5,7 @@
 logging:
   level:
     ROOT: DEBUG
-    com.spiral.express: DEBUG
+    com.spiral.express: INFO
 
 spring:
   datasource:

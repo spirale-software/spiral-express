@@ -1,0 +1,7 @@
+#
+# Configuration pour la prod
+#
+logging:
+  level:
+    ROOT: INFO
+    com.spiral.express: INFO

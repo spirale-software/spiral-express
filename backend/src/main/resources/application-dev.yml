@@ -5,8 +5,7 @@
 logging:
   level:
     ROOT: DEBUG
-    io.github.jhipster: DEBUG
-    io.spiral.express.jhipster: DEBUG
+    com.spiral.express: INFO
 
 spring:
   datasource:
