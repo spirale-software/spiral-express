@@ -23,7 +23,10 @@ import org.springframework.util.ResourceUtils;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,14 +34,15 @@ import java.util.Map;
 @Transactional
 public class GenerationFicheEnvoiAppServiceAppImpl implements GenerationFicheEnvoiAppService {
     private Logger log = LoggerFactory.getLogger(getClass());
+    private final String DIR_NAME = "fiche-envoi";
 
     private final EnvoiAppRepository envoiAppRepository;
 
-    @Autowired
-    private ResourceLoader resourceLoader;
+    private File directory;
 
     public GenerationFicheEnvoiAppServiceAppImpl(EnvoiAppRepository envoiAppRepository) {
         this.envoiAppRepository = envoiAppRepository;
+        this.directory = createDirectory();
     }
 
     @Override
@@ -49,16 +53,24 @@ public class GenerationFicheEnvoiAppServiceAppImpl implements GenerationFicheEnv
             .findById(envoiId)
             .orElseThrow(() -> new ElementNonExistantException("Pas d'Envoi avec cet ID: " + envoiId));
 
-        File file = null;
+       /* File dir = null;*/
         try {
-            file = resourceLoader.getResource("classpath:templates").getFile();
+//            dir = new File("fiche-envoi");
+//            if (!dir.exists()) {
+//                dir.mkdirs();
+//            }
+
+            InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream("templates/envoi.ftl");
+            Files.copy(resourceAsStream, Paths.get(directory + "/" + "envoi.ftl"), StandardCopyOption.REPLACE_EXISTING);
+
+
         } catch (Exception e) {
             e.printStackTrace();
             log.error("Le fichier \"classpath:templates\" n'a pas pu être trouvé");
             throw new GenerationFicheEnvoiException("Erreur lors du chargement du repertoire 'templates'");
         }
         String fileName = "envoi.ftl";
-        String html = FreemarkerUtils.loadFtlHtml(file.getParentFile(), fileName, getVariables(envoi));
+        String html = FreemarkerUtils.loadFtlHtml(directory, fileName, getVariables(envoi));
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         try {
@@ -72,14 +84,16 @@ public class GenerationFicheEnvoiAppServiceAppImpl implements GenerationFicheEnv
     private Map<String, String> getVariables(Envoi envoi) {
         File qrCodeFile = null;
         try {
-            qrCodeFile = resourceLoader.getResource("classpath:qrcode/qrcode-01.png").getFile();
+
+            qrCodeFile = new File(directory + "/" + "qrcode");
+
         } catch (Exception e) {
             e.printStackTrace();
             log.error("Le fichier \"classpath:qrcode/qrcode-01.png\" n'a pas pu être trouvé");
             throw new GenerationFicheEnvoiException("Erreur lor du chargement de la resource 'qrcode/qrcode-01.png");
         }
 
-        QrCodeUtils.genererQrCode(envoi.getReference(), qrCodeFile.getPath());
+        qrCodeFile = QrCodeUtils.genererQrCode(envoi.getReference(), qrCodeFile.getPath());
 
         Map<String, String> map = new HashMap<>();
         map.put(EnvoiTemplateVars.EXPEDITEUR_FULL_NAME, getFullName(envoi.getExpediteur().getPersonne()));
@@ -122,5 +136,13 @@ public class GenerationFicheEnvoiAppServiceAppImpl implements GenerationFicheEnv
             .append(adresse.getVille().toUpperCase())
             .append(", ")
             .append(adresse.getPays()).toString();
+    }
+
+    private File createDirectory() {
+        File dir = new File(DIR_NAME);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        return dir;
     }
 }

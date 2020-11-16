@@ -10,11 +10,12 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.nio.file.Paths;
 
 public class QrCodeUtils {
     private static final Logger log = LoggerFactory.getLogger(QrCodeUtils.class);
 
-    public static void genererQrCode(String data, String outputFileName) {
+    public static File genererQrCode(String data, String outputFileName) {
         log.info("Génération du QR Code, avec comme référence: {}, dans le fichier: {}", data, outputFileName);
 
         final int SIZE = 200;
@@ -26,7 +27,7 @@ public class QrCodeUtils {
         outputFileName = new StringBuilder().append(outputFileName).append(".").append(IMAGE_FORMAT).toString();
 
         // write in a file
-        writeImage(outputFileName, IMAGE_FORMAT, bitMatrix);
+        return writeImage(outputFileName, IMAGE_FORMAT, bitMatrix);
     }
 
     private static BitMatrix generateMatrix(String data, int size) {
@@ -40,14 +41,18 @@ public class QrCodeUtils {
         return bitMatrix;
     }
 
-    private static void writeImage(String outputFileName, String imageFormat, BitMatrix bitMatrix)  {
+    private static File writeImage(String outputFileName, String imageFormat, BitMatrix bitMatrix)  {
      try {
-         FileOutputStream fileOutputStream = new FileOutputStream(new File(outputFileName));
+         File file = new File(outputFileName);
+         FileOutputStream fileOutputStream = new FileOutputStream(file);
+         System.out.println("writeImage: fileOutputStream");
          MatrixToImageWriter.writeToStream(bitMatrix, imageFormat, fileOutputStream);
          fileOutputStream.close();
+         return file;
      } catch (Exception e) {
          System.out.println("ERROR: writeImage" );
          e.printStackTrace();
      }
+     return null;
     }
 }

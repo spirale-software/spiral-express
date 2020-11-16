@@ -12,4 +12,9 @@ public class TestFile {
         System.out.println(file.getParentFile().getAbsolutePath()
         );
     }
+
+    @Test
+    void classLoaderTest() throws Exception {
+
+    }
 }
