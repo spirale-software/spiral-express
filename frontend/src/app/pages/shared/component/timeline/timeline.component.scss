@@ -34,6 +34,13 @@ body {
     width: 50%;
 }
 
+.title {
+    display: block;
+    padding-bottom: 7px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
 /* The circles on the timeline */
 .container::after {
     content: '';
@@ -93,7 +100,7 @@ body {
 
 /* The actual content */
 .content {
-    padding: 20px 30px;
+    padding: 10px 5px;
     background-color: white;
     position: relative;
     border-radius: 6px;
