@@ -18,6 +18,8 @@ export class EnvoiComponent implements OnInit {
 
     envois: Envoi[];
 
+    isLoading = false;
+
     constructor(private envoiService: EnvoiService, private router: Router) {
         this.breadcrumbItems = [];
         this.breadcrumbItems.push({label: 'envois de coli'});
@@ -53,7 +55,9 @@ export class EnvoiComponent implements OnInit {
     }
 
     genererDocument(envoiId: number): void {
+        this.isLoading = true;
         this.envoiService.genererDocument(envoiId).subscribe(res => {
+            this.isLoading = false;
             console.log('genererDocument: ', res);
             const file = new Blob([res], {type: 'application/pdf'});
             const fileURL = URL.createObjectURL(file);
