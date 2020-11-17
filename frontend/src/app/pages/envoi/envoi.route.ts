@@ -7,5 +7,6 @@ export const ENVOI_ROUTES: Routes = [
     {path: 'envois', component: EnvoiComponent},
     {path: 'envois/:id/modifier', component: EnvoiUpdateComponent},
     {path: 'envois/creer', component: EnvoiUpdateComponent},
-    {path: 'envois/:id/detail', component: EnvoiDetailComponent}
+    {path: 'envois/:id/detail', component: EnvoiDetailComponent},
+    {path: 'envois/:reference/reference', component: EnvoiDetailComponent}
 ];

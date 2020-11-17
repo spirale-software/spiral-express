@@ -37,30 +37,47 @@ export class EnvoiDetailComponent implements OnInit, OnChanges {
 
     ngOnInit(): void {
         const envoiId = this.route.snapshot.paramMap.get('id');
+        const reference = this.route.snapshot.paramMap.get('reference');
         if (envoiId) {
-            this.setEnvoi(Number(envoiId));
+            this.setEnvoiById(Number(envoiId));
+        }
+        if (reference) {
+            this.setEnvoiByReference(reference);
         }
     }
 
     ngOnChanges(changes: SimpleChanges): void {
         if (this.envoi) {
-            this.fullNameExpediteur = this.envoi.expediteur.prenom.toUpperCase() + ' ' + this.envoi.expediteur.nom.toUpperCase();
-            this.adresseExpediteur = `${this.envoi.expediteur.adresse.rue} ${this.envoi.expediteur.adresse.codePostal} 
-            ${this.envoi.expediteur.adresse.ville} ${this.envoi.expediteur.adresse.pays}`;
-
-            this.fullNameDestinataire = this.envoi.destinataire.prenom.toUpperCase() + ' ' + this.envoi.destinataire.nom.toUpperCase();
-            this.adresseExpediteur = `${this.envoi.destinataire.adresse.rue} ${this.envoi.destinataire.adresse.codePostal} 
-            ${this.envoi.destinataire.adresse.ville} ${this.envoi.destinataire.adresse.pays}`;
-
-            this.volume = this.envoi.coli.longueur * this.envoi.coli.largeur * this.envoi.coli.hauteur;
-
-            this.poidsVolumetrique = 0;
+           this.setValues();
         }
     }
 
-    setEnvoi(envoiId: number): void {
+    setValues(): void {
+        this.fullNameExpediteur = this.envoi.expediteur.prenom.toUpperCase() + ' ' + this.envoi.expediteur.nom.toUpperCase();
+        this.adresseExpediteur = `${this.envoi.expediteur.adresse.rue} ${this.envoi.expediteur.adresse.codePostal} 
+            ${this.envoi.expediteur.adresse.ville} ${this.envoi.expediteur.adresse.pays}`;
+
+        this.fullNameDestinataire = this.envoi.destinataire.prenom.toUpperCase() + ' ' + this.envoi.destinataire.nom.toUpperCase();
+        this.adresseExpediteur = `${this.envoi.destinataire.adresse.rue} ${this.envoi.destinataire.adresse.codePostal} 
+            ${this.envoi.destinataire.adresse.ville} ${this.envoi.destinataire.adresse.pays}`;
+
+        this.volume = this.envoi.coli.longueur * this.envoi.coli.largeur * this.envoi.coli.hauteur;
+
+        this.poidsVolumetrique = 0;
+    }
+
+    setEnvoiById(envoiId: number): void {
         this.envoiService.getById(envoiId).subscribe(res => {
            this.envoi = res;
+        });
+    }
+
+    setEnvoiByReference(reference: string): void {
+        this.envoiService.findByReference(reference).subscribe(res => {
+            this.envoi = res;
+            this.setValues();
+            console.log();
+
         });
     }
 

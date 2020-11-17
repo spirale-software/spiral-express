@@ -17,6 +17,6 @@ export class ScanQrcodeComponent implements OnInit {
     }
 
     onScanSuccess(reference): void {
-        this.router.navigate(['/envois', reference, 'detail']);
+        this.router.navigate(['/envois', reference, 'reference']);
     }
 }
