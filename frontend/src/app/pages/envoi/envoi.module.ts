@@ -9,7 +9,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
     imports: [PrimengLibModule, SharedModule, CommonModule, FormsModule, ReactiveFormsModule],
-    exports: [],
+    exports: [
+        EnvoiDetailComponent
+    ],
     declarations: [
         EnvoiComponent,
         EnvoiUpdateComponent,

@@ -1,10 +1,7 @@
 <!--
 -->
 <div>
-    <ng-template [ngIf]="!isOpenLikeDialog">
-        <app-breadcrumb [breadcrumbItems]="breadcrumbItems"></app-breadcrumb>
-    </ng-template>
-
+    <app-breadcrumb [breadcrumbItems]="breadcrumbItems"></app-breadcrumb>
 
     <div class="card card-w-title">
         <h1 *ngIf="!isOpenLikeDialog">Détail d'un envoi</h1>
