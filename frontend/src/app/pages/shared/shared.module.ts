@@ -10,6 +10,7 @@ import {PersonneUpdateComponent} from "./component/personne/personne-update.comp
 import {ReactiveFormsModule} from "@angular/forms";
 import {PersonneSelectComponent} from "./component/personne/personne-select.component";
 import {SpinnerComponent} from "./component/spinner/spinner.component";
+import {TimelineComponent} from "./component/timeline/timeline.component";
 
 @NgModule({
     imports: [PrimengLibModule, ZXingScannerModule, CommonModule, ReactiveFormsModule],
@@ -20,10 +21,11 @@ import {SpinnerComponent} from "./component/spinner/spinner.component";
         BreadcrumbComponent,
         PersonneUpdateComponent,
         PersonneSelectComponent,
-        SpinnerComponent
+        SpinnerComponent,
+        TimelineComponent
     ],
     declarations: [ButtonGroupComponent, ScannerDocumentComponent, PersonneDetailComponent, BreadcrumbComponent,
-        PersonneUpdateComponent, PersonneSelectComponent, SpinnerComponent]
+        PersonneUpdateComponent, PersonneSelectComponent, SpinnerComponent, TimelineComponent]
 })
 export class SharedModule {
 }
