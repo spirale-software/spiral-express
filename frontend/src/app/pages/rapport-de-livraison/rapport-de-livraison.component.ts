@@ -14,4 +14,10 @@ export class RapportDeLivraisonComponent {
         this.breadcrumbItems.push({label: 'Rapport de livraison'});
     }
 
+    onScanSuccess(reference): void {
+        if (reference) {
+
+        }
+    }
+
 }
