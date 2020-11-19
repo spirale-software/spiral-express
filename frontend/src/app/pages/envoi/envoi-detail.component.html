@@ -1,10 +1,10 @@
 <!--
 -->
 <div>
-    <app-breadcrumb [breadcrumbItems]="breadcrumbItems"></app-breadcrumb>
+    <app-breadcrumb *ngIf="showHeader" [breadcrumbItems]="breadcrumbItems"></app-breadcrumb>
 
     <div class="card card-w-title">
-        <h1 *ngIf="!isOpenLikeDialog">Détail d'un envoi</h1>
+        <h1 *ngIf="showHeader || !isOpenLikeDialog">Détail d'un envoi</h1>
 
 
         <div style="margin-bottom: 15px"><span style="font-weight: bold; font-size: 18px">{{ envoi?.reference }}</span></div>

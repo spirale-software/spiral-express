@@ -15,6 +15,8 @@ export class EnvoiDetailComponent implements OnInit, OnChanges {
 
     @Input() envoi: Envoi;
 
+    @Input() showHeader = true;
+
     @Input() isOpenLikeDialog = false;
 
     fullNameExpediteur;
