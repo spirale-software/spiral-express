@@ -24,7 +24,9 @@
                                             <span style="display: inline-block; font-size: 18px; font-weight: bold;">{{ envoi.reference }} </span>
                                         </div>
                                         <div class="p-col">
-                                            <span style="background-color: #FBBC05; border-radius: 50%; color: white; padding: 7px 11px;">{{ envoi.statut }}</span>
+                                            <span style="background-color: #FBBC05; border-radius: 50%; color: white; padding: 7px 11px;">
+                                                {{ envoi.statut | statutLabel }}
+                                            </span>
                                         </div>
                                     </div>
                                     <div>

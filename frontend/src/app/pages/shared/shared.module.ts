@@ -11,6 +11,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {PersonneSelectComponent} from "./component/personne/personne-select.component";
 import {SpinnerComponent} from "./component/spinner/spinner.component";
 import {TimelineComponent} from "./component/timeline/timeline.component";
+import {StatutLabelPipe} from "./pipe/statut-label.pipe";
 
 @NgModule({
     imports: [PrimengLibModule, ZXingScannerModule, CommonModule, ReactiveFormsModule],
@@ -22,10 +23,11 @@ import {TimelineComponent} from "./component/timeline/timeline.component";
         PersonneUpdateComponent,
         PersonneSelectComponent,
         SpinnerComponent,
-        TimelineComponent
+        TimelineComponent,
+        StatutLabelPipe
     ],
     declarations: [ButtonGroupComponent, ScannerDocumentComponent, PersonneDetailComponent, BreadcrumbComponent,
-        PersonneUpdateComponent, PersonneSelectComponent, SpinnerComponent, TimelineComponent]
+        PersonneUpdateComponent, PersonneSelectComponent, SpinnerComponent, TimelineComponent, StatutLabelPipe]
 })
 export class SharedModule {
 }
