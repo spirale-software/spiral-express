@@ -11,6 +11,7 @@ import {RapportDeLivraisonComponent} from './rapport-de-livraison/rapport-de-liv
 import {DESTINATAIRE_ROUTES} from './destinataire/destinataire.route';
 import {RAPPORT_DE_QUAI_ROUTES} from './rapport-de-quai/rapport-de-quai.route';
 import {ScanQrcodeComponent} from "./scan-qrcode/scan-qrcode.component";
+import {RAPPORT_DE_LIVRAISON_ROUTES} from "./rapport-de-livraison/rapport-de-livraison.route";
 
 export const PAGES_ROUTES: Routes = [
     {
@@ -34,15 +35,16 @@ export const PAGES_ROUTES: Routes = [
         path: 'scanner-qrcode',
         component: ScanQrcodeComponent
     },
-    {
-        path: 'rapport-de-livraison',
-        component: RapportDeLivraisonComponent
-    },
+    // {
+    //     path: 'rapport-de-livraison',
+    //     component: RapportDeLivraisonComponent
+    // },
      ...CLIENT_ROUTES,
     ...LIVRAISON_COLI_ROUTES,
     ...RECEPTION_COLI_ROUTES,
     ...ENVOI_ROUTES,
     ...PARTENAIRE_ROUTES,
     ...DESTINATAIRE_ROUTES,
-    ...RAPPORT_DE_QUAI_ROUTES
+    ...RAPPORT_DE_QUAI_ROUTES,
+    ...RAPPORT_DE_LIVRAISON_ROUTES
 ];

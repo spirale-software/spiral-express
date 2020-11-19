@@ -16,6 +16,7 @@ import {RapportDeQuaiModule} from './rapport-de-quai/rapport-de-quai.module';
 import {LivraisonColiModule} from './livraison-coli/livraison-coli.module';
 import {MessageService} from "primeng";
 import {ScanQrcodeComponent} from "./scan-qrcode/scan-qrcode.component";
+import {RapportDeLivraisonModule} from "./rapport-de-livraison/rapport-de-livraison.module";
 
 @NgModule({
     imports: [
@@ -27,7 +28,8 @@ import {ScanQrcodeComponent} from "./scan-qrcode/scan-qrcode.component";
         SharedModule,
         DestinataireModule,
         RapportDeQuaiModule,
-        LivraisonColiModule
+        LivraisonColiModule,
+        RapportDeLivraisonModule
     ],
     exports: [RouterModule, AccueilComponent],
     declarations: [
@@ -35,8 +37,7 @@ import {ScanQrcodeComponent} from "./scan-qrcode/scan-qrcode.component";
         LoginComponent,
         ReceptionColiComponent,
         TableauDeBordComponent,
-        ScanQrcodeComponent,
-        RapportDeLivraisonComponent
+        ScanQrcodeComponent
     ],
     providers: [MessageService]
 })
