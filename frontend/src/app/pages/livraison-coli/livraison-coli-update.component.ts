@@ -43,7 +43,8 @@ export class LivraisonColiUpdateComponent implements OnInit {
         window.history.back();
     }
 
-    onConfirmerReceptionClicked() {
+    onConfirmerReceptionClicked(code: string) {
+        console.log(code);
         this.display = false;
     }
 
