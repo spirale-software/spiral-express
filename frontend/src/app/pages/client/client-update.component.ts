@@ -6,6 +6,7 @@ import {Utils} from "../shared/util/utils";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MessageUtilService} from "../shared/util/message-util.service";
 import {Client} from "../shared/model/client";
+import {Adresse} from "../shared/model/adresse";
 
 @Component({
     selector: 'app-client-update',
@@ -16,7 +17,7 @@ export class ClientUpdateComponent implements OnInit {
 
     breadcrumbItems: MenuItem[];
 
-    clientForm: FormGroup;
+    //clientForm: FormGroup;
 
     client: Client;
 
@@ -36,9 +37,10 @@ export class ClientUpdateComponent implements OnInit {
         this.breadcrumbItems.push({label: 'Clients'});
 
 
-        this.initForm();
+        //this.initForm();
         this.client = {} as Client;
-        this.paysOptions = Utils.getPaysOptions();
+        this.client.adresse = {} as Adresse;
+      //  this.paysOptions = Utils.getPaysOptions();
         this.titre = "Création d'un nouveau client";
 
         this.clientId = this.route.snapshot.paramMap.get('id');
@@ -55,7 +57,7 @@ export class ClientUpdateComponent implements OnInit {
             this.clientService.findById(this.clientId).subscribe(res => {
                 console.log('findById: ', res.body);
                 this.client = res.body;
-                this.clientForm.patchValue(this.client);
+               // this.clientForm.patchValue(this.client);
             });
         }
     }
@@ -64,7 +66,7 @@ export class ClientUpdateComponent implements OnInit {
         window.history.back();
     }
 
-    initForm() {
+/*    initForm() {
         this.clientForm = this.fb.group({
             nom: [],
             prenom: [],
@@ -77,16 +79,16 @@ export class ClientUpdateComponent implements OnInit {
                 ville: []
             })
         });
-    }
+    }*/
 
     saveClient(personne) {
-        console.log(personne);
-
+       this.client = personne;
+       this.enregistrer();
     }
 
     enregistrer(): void {
-        console.log('clientForm.value: ', this.clientForm.value);
-        this.client = Object.assign(this.client, this.clientForm.value);
+        // console.log('clientForm.value: ', this.clientForm.value);
+        // this.client = Object.assign(this.client, this.clientForm.value);
         console.log('client: ', this.client);
         this.isLoading = true;
         if (this.client.id) {

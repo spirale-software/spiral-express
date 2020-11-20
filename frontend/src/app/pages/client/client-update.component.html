@@ -9,7 +9,7 @@
 
     <div class="card card-w-title main-content">
         <h1>{{ titre }}</h1>
-        <app-personne-update (onSaveClicked)="saveClient($event)"></app-personne-update>
+        <app-personne-update [personne]="client" (onSaveClicked)="saveClient($event)"></app-personne-update>
     </div>
 
 
