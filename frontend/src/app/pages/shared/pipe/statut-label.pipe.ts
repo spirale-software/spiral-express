@@ -5,11 +5,17 @@ import {StatutEnvoi} from "../model/statut-envoi";
 export class StatutLabelPipe implements PipeTransform {
 
     transform(value: any, ...args: any[]): any {
-        let statut;
-        console.log('StatutLabelPipe: ', value);
-        console.log('PRISE_EN_CHARGE: ', StatutEnvoi.PRISE_EN_CHARGE);
+        let statut = '';
         if (value === StatutEnvoi.PRISE_EN_CHARGE) {
             statut = 'Pris en charge';
+        } else if (value === StatutEnvoi.A_ENLEVER) {
+            statut = 'A Enlever';
+        } else if (value === StatutEnvoi.EN_LIVRAISON) {
+            statut = 'En livraison';
+        } else if (value === StatutEnvoi.EN_ATTENTE) {
+            statut = 'En attente';
+        } else if (value === StatutEnvoi.ARRIVER_ET_SCANNER_AU_DEPOT) {
+            statut = 'Arriver et scanner au dépôt';
         }
 
         return statut;

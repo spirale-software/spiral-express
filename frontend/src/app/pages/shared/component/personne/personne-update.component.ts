@@ -33,9 +33,6 @@ export class PersonneUpdateComponent implements OnInit, OnChanges {
         this.paysOptions = Utils.getPaysOptions();
     }
 
-
-
-
     ngOnInit(): void {
     }
 

@@ -17,11 +17,7 @@ export class ClientUpdateComponent implements OnInit {
 
     breadcrumbItems: MenuItem[];
 
-    //clientForm: FormGroup;
-
     client: Client;
-
-    paysOptions: SelectItem[];
 
     clientId;
 
@@ -37,10 +33,8 @@ export class ClientUpdateComponent implements OnInit {
         this.breadcrumbItems.push({label: 'Clients'});
 
 
-        //this.initForm();
         this.client = {} as Client;
         this.client.adresse = {} as Adresse;
-      //  this.paysOptions = Utils.getPaysOptions();
         this.titre = "Création d'un nouveau client";
 
         this.clientId = this.route.snapshot.paramMap.get('id');
@@ -57,7 +51,6 @@ export class ClientUpdateComponent implements OnInit {
             this.clientService.findById(this.clientId).subscribe(res => {
                 console.log('findById: ', res.body);
                 this.client = res.body;
-               // this.clientForm.patchValue(this.client);
             });
         }
     }
@@ -66,29 +59,12 @@ export class ClientUpdateComponent implements OnInit {
         window.history.back();
     }
 
-/*    initForm() {
-        this.clientForm = this.fb.group({
-            nom: [],
-            prenom: [],
-            telephone: [],
-            email: [],
-            adresse: this.fb.group({
-                pays: [],
-                codePostal: [],
-                rue: [],
-                ville: []
-            })
-        });
-    }*/
-
     saveClient(personne) {
-       this.client = personne;
+       this.client = Object.assign(this.client, personne);
        this.enregistrer();
     }
 
     enregistrer(): void {
-        // console.log('clientForm.value: ', this.clientForm.value);
-        // this.client = Object.assign(this.client, this.clientForm.value);
         console.log('client: ', this.client);
         this.isLoading = true;
         if (this.client.id) {
