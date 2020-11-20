@@ -73,21 +73,34 @@ export class DestinataireComponent implements OnInit {
         } else {
             header = 'Nouveau destinataire';
         }
-        const ref = this.dialogService.open(PersonneUpdateComponent, {header, width: '75%'});
+        const ref = this.dialogService.open(PersonneUpdateComponent, {header, width: '75%', data: {destinataire}});
 
         ref.onClose.subscribe(res => {
            if (res) {
-               const destinataire: Destinataire = Object.assign({}, res);
-               console.log('destinataire: ', destinataire);
+               destinataire = Object.assign(destinataire, res);
                destinataire.client = {} as Client;
                destinataire.client.id = this.clientId;
-               this.destinataireService.create(destinataire).subscribe(() => {
-                   this.destinataireService.findAllByClientId(this.clientId).subscribe(res => {
-                       this.destinataires = res.body;
-                       this.setClient();
+
+               console.log(destinataire);
+
+               if (destinataire.id) {
+                   console.log('update');
+                   this.destinataireService.update(destinataire).subscribe(() => {
+                       this.destinataireService.findAllByClientId(this.clientId).subscribe(res => {
+                           this.destinataires = res.body;
+                           this.setClient();
+                       });
                    });
-               });
-               console.log('openDialog: ', res);
+               } else {
+                   this.destinataireService.create(destinataire).subscribe(() => {
+                       this.destinataireService.findAllByClientId(this.clientId).subscribe(res => {
+                           this.destinataires = res.body;
+                           this.setClient();
+                       });
+                   });
+               }
+
+
            }
         });
     }

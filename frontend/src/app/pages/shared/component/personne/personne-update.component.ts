@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Optional, Output, SimpleChanges} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {DynamicDialogRef, SelectItem} from 'primeng';
+import {DynamicDialogConfig, DynamicDialogRef, SelectItem} from 'primeng';
 import {Utils} from '../../util/utils';
 import {Personne} from "../../model/personne";
 import {Adresse} from "../../model/adresse";
@@ -22,13 +22,17 @@ export class PersonneUpdateComponent implements OnInit, OnChanges {
     @Output() onSaveClicked = new EventEmitter<Personne>();
 
     constructor(private fb: FormBuilder,
-                @Optional() private ref: DynamicDialogRef) {
+                @Optional() private ref: DynamicDialogRef,
+                @Optional() private conf: DynamicDialogConfig) {
         this.personne = {} as Personne;
         this.personne.adresse = {} as Adresse;
         this.initForm();
 
         if (ref) {
             this.isOpenLikePopup = true;
+            const personne = this.conf.data;
+            console.log(this.conf.data);
+            this.personneForm.patchValue(this.conf.data.destinataire);
         }
         this.paysOptions = Utils.getPaysOptions();
     }

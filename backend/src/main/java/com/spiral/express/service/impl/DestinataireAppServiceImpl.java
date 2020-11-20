@@ -44,7 +44,7 @@ public class DestinataireAppServiceImpl implements DestinataireAppService {
     @Override
     public DestinataireDTO modifier(DestinataireDTO destinataireDTO) {
         log.info("Modifier un destinataire: {}", destinataireDTO);
-        return null;
+        return sauver(destinataireDTO);
     }
 
     @Override
