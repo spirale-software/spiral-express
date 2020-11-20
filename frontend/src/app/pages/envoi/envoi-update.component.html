@@ -4,7 +4,7 @@
 <p-dialog [header]="titreDialog" [(visible)]="isVisible" [modal]="true" [style]="{'width':'90%'}">
 
     <ng-template [ngIf]="displayEnvoiDetail">
-        <app-envoi-detail [isOpenLikeDialog]="true" [envoi]="envoi"></app-envoi-detail>
+        <app-envoi-detail [isOpenLikeDialog]="true" [envoi]="envoi" [showHeader]="false"></app-envoi-detail>
     </ng-template>
     <ng-template [ngIf]="displayPersonneDetail">
         <app-personne-detail></app-personne-detail>
