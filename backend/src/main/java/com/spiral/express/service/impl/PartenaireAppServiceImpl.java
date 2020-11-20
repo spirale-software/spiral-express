@@ -41,7 +41,7 @@ public class PartenaireAppServiceImpl implements PartenaireAppService {
     @Override
     public PartenaireDTO modifier(PartenaireDTO partenaireDTO) {
         log.info("Modifier un partenaire: {}", partenaireDTO);
-        return null;
+        return sauver(partenaireDTO);
     }
 
     @Override

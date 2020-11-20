@@ -22,6 +22,8 @@ export class PartenaireUpdateComponent implements OnInit {
         this.breadcrumbItems = [];
         this.breadcrumbItems.push({label: 'Clients'});
 
+        this.partenaire = {} as Partenaire;
+
         if (this.route.snapshot.paramMap.get('id')) {
             this.partenaireId = Number(this.route.snapshot.paramMap.get('id'));
             this.breadcrumbItems.push({label: 'modifier un partenaire'});
@@ -42,8 +44,12 @@ export class PartenaireUpdateComponent implements OnInit {
     }
 
     onSaveClicked(partenaire) {
-        console.log('partenaire: ', partenaire);
-        this.partenaireService.create(partenaire).subscribe(() => this.router.navigate(['/partenaires']));
+        this.partenaire = Object.assign(this.partenaire, partenaire);
+        if (this.partenaire.id) {
+            this.partenaireService.update(partenaire).subscribe(() => this.router.navigate(['/partenaires']));
+        } else {
+            this.partenaireService.create(partenaire).subscribe(() => this.router.navigate(['/partenaires']));
+        }
     }
 
 

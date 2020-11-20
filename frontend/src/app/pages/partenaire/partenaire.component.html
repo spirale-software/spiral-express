@@ -31,9 +31,9 @@
                                             style="display: inline-block; padding: 7px 0px; padding-right: 11px">Email: <strong>{{ partenaire?.email }}</strong></span>
                                     </div>
                                     <div>
-                                    <span
-                                        style="display: inline-block; padding: 7px 0px; padding-right: 11px">Pays: <strong>{{ partenaire?.adresse?.pays }}</strong></span>
+                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px">Pays: <strong>{{ partenaire?.adresse?.pays }}</strong></span>
                                         <span style="display: inline-block; padding: 7px 0px; padding-right: 11px">Ville: <strong>{{ partenaire?.adresse?.ville }}</strong></span>
+                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px">Rue: <strong>{{ partenaire?.adresse?.rue }}</strong></span>
                                     </div>
 
                                 </div>
@@ -48,7 +48,8 @@
 
                                         <button pButton label="Supprimer" icon="fa fa-trash"
                                                 class="ui-button ui-button-danger small-screen-hide"
-                                                (click)="confirmerSuppression(partenaire)"></button>
+                                                (click)="confirmerSuppression(partenaire)" pTooltip="En developpement...">
+                                        </button>
                                     </div>
                                 </ng-template>
                                 <ng-template [ngIf]="isOpenLikeDialog">
