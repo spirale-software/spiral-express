@@ -36,13 +36,12 @@
                                     </div>
                                     <div>
                                         <span style="display: inline-block; padding: 7px 0px; padding-right: 11px"><i class="fa fa-user"></i> Expéditeur: <strong>{{ getExpediteur(envoi.expediteur) }}</strong></span>
-                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px"><i class="fa fa-flag"></i> Pays expédition: <strong>{{ getPaysExpedition(envoi.expediteur) }}</strong></span>
+                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px"><i class="fa fa-flag"></i> Pays expédition: <strong>{{ envoi?.expediteur?.adresse.pays | paysLabel }}</strong></span>
                                     </div>
                                     <div>
                                         <span style="display: inline-block; padding: 7px 0px; padding-right: 11px"><i class="fa fa-user"></i> Destinataire: <strong>{{ envoi?.destinataire?.prenom }} {{ envoi?.destinataire?.nom }}</strong></span>
-                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px"><i class="fa fa-flag"></i> Pays de destination: <strong>{{ envoi?.destinataire?.adresse.pays }}</strong></span>
+                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px"><i class="fa fa-flag"></i> Pays de destination: <strong>{{ envoi?.destinataire?.adresse.pays | paysLabel }}</strong></span>
                                         <span style="display: inline-block; padding: 7px 0px; padding-right: 11px"><i class="fa fa-building"></i> Ville de destination: <strong>{{ envoi?.destinataire?.adresse.ville }}</strong></span>
-<!--                                        <span style="display: inline-block; padding: 7px 0px; padding-right: 11px">Adresse de destination: <strong>{{ envoi?.destinataire?.adresse.adresse }}</strong></span>-->
                                     </div>
                                 </div>
                                 <button pButton label="Générer document" icon="pi pi-file-pdf" style="margin-right: 7px" class="big-screen-hide"
