@@ -7,7 +7,13 @@
 
     <app-breadcrumb [breadcrumbItems]="breadcrumbItems"></app-breadcrumb>
 
-    <div class="card card-w-title main-content" [formGroup]="clientForm">
+    <div class="card card-w-title main-content">
+        <h1>{{ titre }}</h1>
+        <app-personne-update (onSaveClicked)="saveClient($event)"></app-personne-update>
+    </div>
+
+
+    <!--<div class="card card-w-title main-content" [formGroup]="clientForm">
         <h1>{{ titre }}</h1>
 
         <div>
@@ -81,5 +87,5 @@
             </div>
 
         </div>
-    </div>
+    </div>-->
 </div>

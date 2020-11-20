@@ -79,6 +79,11 @@ export class ClientUpdateComponent implements OnInit {
         });
     }
 
+    saveClient(personne) {
+        console.log(personne);
+
+    }
+
     enregistrer(): void {
         console.log('clientForm.value: ', this.clientForm.value);
         this.client = Object.assign(this.client, this.clientForm.value);

@@ -3,7 +3,7 @@
 <div>
     <div [formGroup]="personneForm">
         <div style="margin-bottom: 11px">
-            <div><span>Nom</span></div>
+            <div><span>Nom <span style="color: red">*</span></span></div>
             <div class="ui-inputgroup">
                 <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
                 <input pInputText formControlName="nom">
@@ -11,7 +11,7 @@
         </div>
 
         <div style="margin-bottom: 11px">
-            <div><span>Prénom</span></div>
+            <div><span>Prénom <span style="color: red">*</span></span></div>
             <div class="ui-inputgroup">
                 <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
                 <input pInputText formControlName="prenom">
@@ -25,17 +25,19 @@
             </div>
         </div>
         <div style="margin-bottom: 11px">
-            <div><span>Téléphone</span></div>
+            <div><span>Téléphone <span style="color: red">*</span></span></div>
             <div class="ui-inputgroup">
                 <span class="ui-inputgroup-addon"><i class="fa fa-phone"></i></span>
                 <input pInputText formControlName="telephone">
             </div>
         </div>
         <div style="margin-bottom: 11px">
-            <div><span>Pays</span></div>
+            <div><span>Pays <span style="color: red">*</span></span></div>
             <div class="ui-inputgroup">
                 <span class="ui-inputgroup-addon"><i class="fa fa-flag"></i></span>
-                <p-dropdown [formControl]="personneForm.get('adresse').get('pays')" [options]="paysOptions"></p-dropdown>
+                <p-dropdown [formControl]="personneForm.get('adresse').get('pays')"
+                            [options]="paysOptions" [autoDisplayFirst]="false">
+                </p-dropdown>
             </div>
         </div>
         <div style="margin-bottom: 11px">
@@ -68,7 +70,9 @@
             </ng-template>
 
 
-            <button pButton label="Enregistrer" icon="fa fa-save" (click)="onSaveCliked()" style="margin-right: 7px"></button>
+            <button pButton label="Enregistrer" icon="fa fa-save" (click)="onSaveCliked()" style="margin-right: 7px"
+                    [disabled]="!personneForm.valid">
+            </button>
 
             <ng-template [ngIf]="!isOpenLikePopup">
                 <button pButton label="Supprimer" icon="fa fa-trash"

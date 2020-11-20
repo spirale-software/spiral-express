@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Optional, Output, SimpleChanges} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {DynamicDialogRef, SelectItem} from 'primeng';
 import {Utils} from '../../util/utils';
 import {Personne} from "../../model/personne";
@@ -41,12 +41,12 @@ export class PersonneUpdateComponent implements OnInit, OnChanges {
 
     initForm() {
         this.personneForm = this.fb.group({
-            nom: [this.personne.nom],
-            prenom: [this.personne.prenom],
-            telephone: [this.personne.telephone],
-            email: [this.personne.email],
+            nom: [this.personne.nom, Validators.required],
+            prenom: [this.personne.prenom, Validators.required],
+            telephone: [this.personne.telephone, [Validators.required, Validators.pattern('^[0-9]+$')]],
+            email: [this.personne.email, Validators.email],
             adresse: this.fb.group({
-                pays: [this.personne.adresse.pays],
+                pays: [this.personne.adresse.pays, Validators.required],
                 codePostal: [this.personne.adresse.codePostal],
                 rue: [this.personne.adresse.rue],
                 ville: [this.personne.adresse.ville]
