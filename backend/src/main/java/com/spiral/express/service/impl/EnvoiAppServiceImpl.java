@@ -24,14 +24,16 @@ public class EnvoiAppServiceImpl implements EnvoiAppService {
     private final EnvoiMapper envoiMapper;
     private final EnvoiAppRepository envoiAppRepository;
     private final ColiAppService coliAppService;
+    private final MailService mailService;
 
     private Random random;
 
     public EnvoiAppServiceImpl(EnvoiMapper envoiMapper, EnvoiAppRepository envoiAppRepository,
-                               ColiAppService coliAppService) {
+                               ColiAppService coliAppService, MailService mailService) {
         this.envoiMapper = envoiMapper;
         this.envoiAppRepository = envoiAppRepository;
         this.coliAppService = coliAppService;
+        this.mailService = mailService;
         this.random = new Random();
     }
 
@@ -53,6 +55,8 @@ public class EnvoiAppServiceImpl implements EnvoiAppService {
         envoi.setStatut(StatutEnvoi.PRISE_EN_CHARGE);
         envoi.setDateCreation(ZonedDateTime.now());
         envoi = envoiAppRepository.save(envoi);
+
+        mailService.sendEmail("lapigerard@yahoo.fr", "Just to test", "ça fonctionne", false, false);
 
         return envoiMapper.toDto(envoi);
     }
