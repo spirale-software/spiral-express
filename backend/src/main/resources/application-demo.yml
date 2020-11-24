@@ -27,6 +27,13 @@ spring:
     port: 587
     username: gyleentrepreneur@gmail.com
     password: entrepreneur1989
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enabled: true
+            required: true
   messages:
     cache-duration: PT1S # 1 second, see the ISO 8601 standard
 
@@ -38,6 +45,8 @@ application:
     account-sid: AC76125ec69b9076d4d65427cefe5c4346
     auth-token: 75599ca2fe260e0adef42aa5388cedad
     phone-number: '+13518881502'
+  mail:
+    from: gyleentrepreneur@gmail.com
 
 
 

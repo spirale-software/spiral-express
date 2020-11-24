@@ -1,12 +1,10 @@
 package com.spiral.express.service.impl;
 
 
+import com.spiral.express.config.ApplicationProperties;
 import com.spiral.express.service.MailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.context.event.ApplicationStartedEvent;
-import org.springframework.context.MessageSource;
-import org.springframework.context.event.EventListener;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -16,7 +14,6 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.mail.*;
-import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.nio.charset.StandardCharsets;
 import java.util.Properties;
@@ -27,9 +24,11 @@ public class MailServiceImpl implements MailService {
     private final Logger log = LoggerFactory.getLogger(MailServiceImpl.class);
 
     private final JavaMailSender javaMailSender;
+    private final ApplicationProperties applicationProperties;
 
-    public MailServiceImpl(JavaMailSender javaMailSender) {
+    public MailServiceImpl(JavaMailSender javaMailSender, ApplicationProperties applicationProperties) {
         this.javaMailSender = javaMailSender;
+        this.applicationProperties = applicationProperties;
     }
 
     @Async
@@ -80,6 +79,23 @@ public class MailServiceImpl implements MailService {
 
     @Override
     public void sendEmail(String to, String subject, String content) {
+        log.debug("Send email[multipart '{}' and html '{}'] to '{}' with subject '{}' and content={}",
+                to, subject, content);
 
+        // Prepare message using a Spring helper
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+
+        try {
+            MimeMessageHelper message = new MimeMessageHelper(mimeMessage, false, StandardCharsets.UTF_8.name());
+            message.setTo(to);
+            message.setFrom(applicationProperties.getMail().getFrom());
+            message.setSubject(subject);
+            message.setText(content, true);
+
+            javaMailSender.send(mimeMessage);
+            log.debug("Sent email to User '{}'", to);
+        }  catch (MailException | MessagingException e) {
+            log.warn("Email could not be sent to user '{}'", to, e);
+        }
     }
 }
