@@ -67,6 +67,9 @@ export class DestinataireComponent implements OnInit {
     }
 
     openDialog(destinataire ?: any) {
+        if (!destinataire) {
+            destinataire = {} as Destinataire;
+        }
         let header;
         if (destinataire) {
             header = 'Editer un destinataire';
