@@ -3,27 +3,27 @@ package com.spiral.express.service.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.MessageSource;
+import org.springframework.context.event.EventListener;
 import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.nio.charset.StandardCharsets;
-import java.util.Locale;
 import java.util.Properties;
 
 @Service
-public class MailService {
+public class MailServiceImpl {
 
-    private final Logger log = LoggerFactory.getLogger(MailService.class);
+    private final Logger log = LoggerFactory.getLogger(MailServiceImpl.class);
 
     private static final String USER = "user";
 
@@ -33,7 +33,7 @@ public class MailService {
 
     private final MessageSource messageSource;
 
-    public MailService(JavaMailSender javaMailSender, MessageSource messageSource) {
+    public MailServiceImpl(JavaMailSender javaMailSender, MessageSource messageSource) {
         this.javaMailSender = javaMailSender;
         this.messageSource = messageSource;
     }
@@ -58,6 +58,71 @@ public class MailService {
         }  catch (MailException | MessagingException e) {
             log.warn("Email could not be sent to user '{}'", to, e);
         }
+    }
+
+    //@PostConstruct
+    @EventListener(ApplicationStartedEvent.class)
+    public void sendEmail() {
+        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+        mailSender.setHost("smtp.gmail.com");
+        mailSender.setPort(587);
+
+        mailSender.setUsername("gyleentrepreneur@gmail.com");
+        mailSender.setPassword("entrepreneur1989");
+
+        Properties props = mailSender.getJavaMailProperties();
+        props.put("mail.transport.protocol", "smtp");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.debug", "true");
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("gyleentrepreneur@gmail.com");
+        message.setTo("lapigerard@yahoo.fr");
+        message.setSubject("Test");
+        message.setText("ça fonctionne! Yesss");
+        mailSender.send(message);
+    }
+
+
+    public void test() {
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+
+
+        try {
+            MimeMessageHelper message = new MimeMessageHelper(mimeMessage, false, StandardCharsets.UTF_8.name());
+            message.setTo("lapigerard@yahoo.fr");
+            message.setFrom("gyleentrepreneur@gmail.com");
+            message.setSubject("Test");
+            message.setText("ça fonctionne!");
+            javaMailSender.send(mimeMessage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    void test2() throws Exception {
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("gyleentrepreneur@gmail.com", "entrepreneur1989");
+            }
+        });
+        MimeMessage msg = new MimeMessage(session);
+        msg.setFrom(new InternetAddress("gyleentrepreneur@gmail.com", false));
+
+        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("lapigerard@yahoo.fr"));
+        msg.setSubject("Tutorials point email");
+        msg.setContent("Tutorials point email", "text/html");
+
+        javaMailSender.send(msg);
     }
 
 
