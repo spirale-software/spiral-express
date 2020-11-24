@@ -12,11 +12,11 @@
         <div class="p-grid" style="margin-bottom: 21px">
             <div class="p-col">
                 <span class="nom-label">Date</span>
-                <span>{{ envoi?.dateCreation }}</span>
+                <span>{{ envoi?.dateCreation | date:'dd/MM/yyyy'}}</span>
             </div>
             <div class="p-col">
                 <span class="nom-label">Statut</span>
-                <span>{{ envoi?.statut }}</span>
+                <span>{{ envoi.statut | statutLabel }}</span>
             </div>
         </div>
 

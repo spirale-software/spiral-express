@@ -74,6 +74,7 @@ export class EnvoiDetailComponent implements OnInit, OnChanges {
     setEnvoiById(envoiId: number): void {
         this.envoiService.getById(envoiId).subscribe(res => {
            this.envoi = res;
+           this.setValues();
         });
     }
 

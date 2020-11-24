@@ -7,6 +7,7 @@ import com.spiral.express.dto.EnvoiDTO;
 import com.spiral.express.repository.EnvoiAppRepository;
 import com.spiral.express.service.ColiAppService;
 import com.spiral.express.service.EnvoiAppService;
+import com.spiral.express.service.StatutEnvoiService;
 import com.spiral.express.service.error.ElementNonExistantException;
 import com.spiral.express.service.mapper.EnvoiMapper;
 import org.slf4j.Logger;
@@ -24,16 +25,16 @@ public class EnvoiAppServiceImpl implements EnvoiAppService {
     private final EnvoiMapper envoiMapper;
     private final EnvoiAppRepository envoiAppRepository;
     private final ColiAppService coliAppService;
-    //private final MailService mailService;
+    private final StatutEnvoiService statutEnvoiService;
 
     private Random random;
 
     public EnvoiAppServiceImpl(EnvoiMapper envoiMapper, EnvoiAppRepository envoiAppRepository,
-                               ColiAppService coliAppService/*,MailService mailService*/) {
+                               ColiAppService coliAppService, StatutEnvoiService statutEnvoiService) {
         this.envoiMapper = envoiMapper;
         this.envoiAppRepository = envoiAppRepository;
         this.coliAppService = coliAppService;
-       // this.mailService = mailService;
+        this.statutEnvoiService = statutEnvoiService;
         this.random = new Random();
     }
 
@@ -52,11 +53,9 @@ public class EnvoiAppServiceImpl implements EnvoiAppService {
         Envoi envoi = envoiMapper.toEntity(dto);
         envoi.setColi(coli);
         envoi.setReference(getReference());
-        envoi.setStatut(StatutEnvoi.PRISE_EN_CHARGE);
         envoi.setDateCreation(ZonedDateTime.now());
+        envoi = statutEnvoiService.prisEnCharge(envoi);
         envoi = envoiAppRepository.save(envoi);
-
-       // mailService.sendEmail("lapigerard@yahoo.fr", "Just to test", "ça fonctionne", false, false);
 
         return envoiMapper.toDto(envoi);
     }
