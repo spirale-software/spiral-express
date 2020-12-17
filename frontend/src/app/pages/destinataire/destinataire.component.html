@@ -29,7 +29,7 @@
                                     style="display: block; font-size: 18px; font-weight: bold">{{ destinataire?.prenom }} {{ destinataire?.nom }}</span>
                                     <div>
                                     <span
-                                        style="display: inline-block; padding: 7px 0px; padding-right: 11px">Tel: +<strong>{{ destinataire?.telephone }}</strong></span>
+                                        style="display: inline-block; padding: 7px 0px; padding-right: 11px">Tel: +<strong>{{ getCodeTelPays(destinataire?.adresse?.pays) }}{{ destinataire?.telephone }}</strong></span>
                                         <span
                                             style="display: inline-block; padding: 7px 0px; padding-right: 11px">Email: <strong>{{ destinataire?.email }}</strong></span>
                                     </div>

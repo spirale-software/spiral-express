@@ -5,6 +5,7 @@ import {PersonneUpdateComponent} from "../shared/component/personne/personne-upd
 import {DestinataireService} from "./destinataire.service";
 import {Destinataire} from "../shared/model/destinataire";
 import {Client} from "../shared/model/client";
+import {Utils} from "../shared/util/utils";
 
 @Component({
     selector: 'app-destinataire',
@@ -66,6 +67,10 @@ export class DestinataireComponent implements OnInit {
         window.history.back();
     }
 
+    getCodeTelPays(pays: any): string {
+        return pays ? Utils.getCodeTelPays(pays).toString() : "";
+    }
+
     openDialog(destinataire ?: any) {
         if (!destinataire) {
             destinataire = {} as Destinataire;
@@ -102,8 +107,6 @@ export class DestinataireComponent implements OnInit {
                        });
                    });
                }
-
-
            }
         });
     }
