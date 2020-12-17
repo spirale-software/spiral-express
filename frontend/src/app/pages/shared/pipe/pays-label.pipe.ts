@@ -15,6 +15,14 @@ export class PaysLabelPipe implements PipeTransform {
                 result = 'Congo brazzaville'
             } else if (value === Pays.RWANDA) {
                 result = 'Rwanda'
+            } else if (value === Pays.BELGIQUE) {
+                result = "Belgique"
+            } else if (value === Pays.LUXEMBOURG) {
+                result = "Luxembourg"
+            }  else if (value === Pays.ALLEMAGNE) {
+                result = "Allemagne"
+            }  else if (value === Pays.FRANCE) {
+                result = "France"
             }
         }
         return result;

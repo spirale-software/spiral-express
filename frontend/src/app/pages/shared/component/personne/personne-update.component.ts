@@ -57,8 +57,7 @@ export class PersonneUpdateComponent implements OnInit, OnChanges {
         });
 
         this.personneForm.get('adresse').get('pays').valueChanges.subscribe(res => {
-            const pays = Utils.getAllPays().find(item => item.code === res);
-            this.codePays = pays.codeTel;
+            this.codePays = Utils.getCodeTelPays(res);
         });
     }
 

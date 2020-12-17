@@ -4,6 +4,7 @@ import {ClientService} from "./client.service";
 import {Router} from "@angular/router";
 import {Client} from "../shared/model/client";
 import {MessageUtilService} from "../shared/util/message-util.service";
+import {Utils} from "../shared/util/utils";
 
 @Component({
     selector: 'app-client',
@@ -75,6 +76,10 @@ export class ClientComponent implements OnInit {
                 this.messageUtilService.showErrorToaster('Echec', 'Une erreur s\'est produite lors de la suppression');
                 this.isLoading = false;
             });
+    }
+
+    getCodeTelPays(pays: any): string {
+        return pays ? Utils.getCodeTelPays(pays).toString() : "";
     }
 
     navigateTo(client): void {

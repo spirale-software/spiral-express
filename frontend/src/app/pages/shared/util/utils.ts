@@ -39,4 +39,9 @@ export class Utils {
         });
         return options;
     }
+
+    public static getCodeTelPays(codePays): number {
+        const pays = Utils.getAllPays().find(item => item.code === codePays);
+        return pays ? pays.codeTel : null;
+    }
 }
