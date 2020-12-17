@@ -1,10 +1,13 @@
 package com.spiral.express.service.impl;
 
+import com.spiral.express.domain.Destinataire;
 import com.spiral.express.domain.Envoi;
+import com.spiral.express.domain.Personne;
 import com.spiral.express.domain.enumeration.StatutEnvoi;
 import com.spiral.express.service.MailService;
 import com.spiral.express.service.SmsService;
 import com.spiral.express.service.StatutEnvoiService;
+import com.spiral.express.utils.CodePaysUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -28,11 +31,13 @@ public class StatutEnvoiServiceImpl implements StatutEnvoiService {
         log.info("Prise en charge de l'envoi: {}", envoi);
 
         String destinataireMsg = "Un coli vous ai destiné";
-        String tel = "+" + envoi.getDestinataire().getPersonne().getTelephone();
+        Personne destinataire = envoi.getDestinataire().getPersonne();
+        String tel = CodePaysUtils.getCodePays(destinataire.getAdresse().getPays()) + destinataire.getTelephone();
         smsService.sendSms(tel, destinataireMsg);
 
         String expediteurMsg = "Votre coli est bien pris en charge.";
-        String tel2 = "+" + envoi.getExpediteur().getPersonne().getTelephone();
+        Personne expediteur = envoi.getExpediteur().getPersonne();
+        String tel2 = CodePaysUtils.getCodePays(expediteur.getAdresse().getPays()) + expediteur.getTelephone();
         smsService.sendSms(tel2, expediteurMsg);
 
         String subject = "Suivi envoi: " + envoi.getReference();
