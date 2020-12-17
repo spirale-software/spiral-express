@@ -22,10 +22,14 @@ export class Utils {
 
     public static getAllPays(): any[] {
         return [
-            {code: 'CAMEROUN', libelle: 'Cameroun'},
-            {code: 'RWANDA', libelle: 'Rwanda'},
-            {code: 'CONGO_BRAZZAVILLE', libelle: 'Congo brazzavile'},
-            {code: 'BURKINA_FASO', libelle: 'Burkina faso'}];
+            {code: 'BELGIQUE', libelle: 'Belgique', codeTel: 32},
+            {code: 'FRANCE', libelle: 'France', codeTel: 33 },
+            {code: 'ALLEMAGNE', libelle: 'Allemagne', codeTel: 49 },
+            {code: 'LUXEMBOURG', libelle: 'Luxembourg', codeTel: 352 },
+            {code: 'CAMEROUN', libelle: 'Cameroun', codeTel: 237},
+            {code: 'RWANDA', libelle: 'Rwanda', codeTel: 250},
+            {code: 'CONGO_BRAZZAVILLE', libelle: 'Congo brazzavile', codeTel: 242},
+            {code: 'BURKINA_FASO', libelle: 'Burkina faso', codeTel: 226}];
     }
 
     public static getPaysOptions(): SelectItem[] {

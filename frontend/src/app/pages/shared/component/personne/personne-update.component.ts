@@ -21,6 +21,8 @@ export class PersonneUpdateComponent implements OnInit, OnChanges {
 
     @Output() onSaveClicked = new EventEmitter<Personne>();
 
+    codePays;
+
     constructor(private fb: FormBuilder,
                 @Optional() private ref: DynamicDialogRef,
                 @Optional() private conf: DynamicDialogConfig) {
@@ -52,6 +54,11 @@ export class PersonneUpdateComponent implements OnInit, OnChanges {
                 rue: [this.personne.adresse.rue],
                 ville: [this.personne.adresse.ville]
             })
+        });
+
+        this.personneForm.get('adresse').get('pays').valueChanges.subscribe(res => {
+            const pays = Utils.getAllPays().find(item => item.code === res);
+            this.codePays = pays.codeTel;
         });
     }
 

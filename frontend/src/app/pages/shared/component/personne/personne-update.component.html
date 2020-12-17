@@ -24,13 +24,7 @@
                 <input pInputText formControlName="email">
             </div>
         </div>
-        <div style="margin-bottom: 11px">
-            <div><span>Téléphone <span style="color: red">*</span></span></div>
-            <div class="ui-inputgroup">
-                <span class="ui-inputgroup-addon"><i class="fa fa-phone"></i></span>
-                <input pInputText formControlName="telephone">
-            </div>
-        </div>
+
         <div style="margin-bottom: 11px">
             <div><span>Pays <span style="color: red">*</span></span></div>
             <div class="ui-inputgroup">
@@ -40,6 +34,17 @@
                 </p-dropdown>
             </div>
         </div>
+
+        <div style="margin-bottom: 11px">
+            <div><span>Téléphone <span style="color: red">*</span></span></div>
+            <div class="ui-inputgroup">
+                <span class="ui-inputgroup-addon"><i class="fa fa-phone"></i></span>
+                <span class="ui-inputgroup-addon" *ngIf="codePays">+{{ codePays }}</span>
+                <input pInputText formControlName="telephone">
+            </div>
+        </div>
+
+
         <div style="margin-bottom: 11px">
             <div><span>Code postal</span></div>
             <div class="ui-inputgroup">
