@@ -43,9 +43,13 @@ public class StatutEnvoiServiceImpl implements StatutEnvoiService {
         String subject = "Suivi envoi: " + envoi.getReference();
         String contenu = "Suivez votre envoi";
 
-        mailService.sendEmail(envoi.getDestinataire().getPersonne().getEmail(), subject, contenu);
+        if (envoi.getDestinataire().getPersonne().getEmail() != null) {
+            mailService.sendEmail(envoi.getDestinataire().getPersonne().getEmail(), subject, contenu);
+        }
 
-        mailService.sendEmail(envoi.getExpediteur().getPersonne().getEmail(), subject, contenu);
+        if (envoi.getExpediteur().getPersonne().getEmail() != null) {
+            mailService.sendEmail(envoi.getExpediteur().getPersonne().getEmail(), subject, contenu);
+        }
 
         envoi.setStatut(StatutEnvoi.PRISE_EN_CHARGE);
 
