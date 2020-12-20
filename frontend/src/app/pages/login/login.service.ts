@@ -20,7 +20,8 @@ export class LoginService {
     }
 
     logout(): void {
-
+        localStorage.removeItem('authenticationToken');
+        sessionStorage.removeItem('authenticationToken');
     }
 
     authenticateSuccess(response: JwtToken, rememberMe: boolean): void {

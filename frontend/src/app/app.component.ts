@@ -2,6 +2,7 @@ import {Component, Renderer2} from '@angular/core';
 import { MenuService } from './app.menu.service';
 import {Router} from "@angular/router";
 import {AccountService} from "./pages/auth/account.service";
+import {LoginService} from "./pages/login/login.service";
 
 enum MenuMode {
     STATIC,
@@ -40,10 +41,15 @@ export class AppComponent {
 
     menuHoverActive: boolean;
 
-    constructor(public renderer: Renderer2, private menuService: MenuService, private router: Router, private accountService: AccountService) {}
+    constructor(public renderer: Renderer2, private menuService: MenuService, private router: Router, private accountService: AccountService,
+                private loginService: LoginService) {}
 
     isAuthenticated(): boolean {
        return this.accountService.isAuthenticated();
+    }
+
+    onDeconnexionClick(): void {
+        this.loginService.logout();
     }
 
     onLayoutClick() {
