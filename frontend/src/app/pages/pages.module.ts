@@ -17,6 +17,8 @@ import {LivraisonColiModule} from './livraison-coli/livraison-coli.module';
 import {MessageService} from "primeng";
 import {ScanQrcodeComponent} from "./scan-qrcode/scan-qrcode.component";
 import {RapportDeLivraisonModule} from "./rapport-de-livraison/rapport-de-livraison.module";
+import {AuthInterceptor} from "./auth/auth.interceptor";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
 
 @NgModule({
     imports: [
@@ -39,6 +41,13 @@ import {RapportDeLivraisonModule} from "./rapport-de-livraison/rapport-de-livrai
         TableauDeBordComponent,
         ScanQrcodeComponent
     ],
-    providers: [MessageService]
+    providers: [
+        MessageService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true
+        },
+    ]
 })
 export class PagesModule {}

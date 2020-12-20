@@ -1,6 +1,7 @@
 import {Component, Renderer2} from '@angular/core';
 import { MenuService } from './app.menu.service';
 import {Router} from "@angular/router";
+import {AccountService} from "./pages/auth/account.service";
 
 enum MenuMode {
     STATIC,
@@ -21,8 +22,6 @@ export class AppComponent {
 
     darkMenu = true;
 
-    documentClickListener: () => void;
-
     staticMenuInactive: boolean;
 
     overlayMenuActive: boolean;
@@ -41,18 +40,10 @@ export class AppComponent {
 
     menuHoverActive: boolean;
 
-    isAuth = false;
-
-    constructor(public renderer: Renderer2, private menuService: MenuService, private router: Router) {localStorage.setItem('isAuthenticated', 'false');}
+    constructor(public renderer: Renderer2, private menuService: MenuService, private router: Router, private accountService: AccountService) {}
 
     isAuthenticated(): boolean {
-       return this.isAuth;
-    }
-
-    onAuthentication(auth): void {
-        console.log('onAuthentication: ', auth);
-        setTimeout(() => this.isAuth = auth, 200);
-       // this.isAuth = auth;
+       return this.accountService.isAuthenticated();
     }
 
     onLayoutClick() {

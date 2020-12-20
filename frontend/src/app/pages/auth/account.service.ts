@@ -4,6 +4,7 @@ import {Injectable} from "@angular/core";
 export class AccountService {
 
     isAuthenticated(): boolean {
-        return true;
+        const token = sessionStorage.getItem('authenticationToken') || localStorage.getItem('authenticationToken');
+        return token ? true : false;
     }
 }

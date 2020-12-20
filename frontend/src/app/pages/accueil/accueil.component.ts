@@ -9,8 +9,6 @@ import {Router} from "@angular/router";
 export class AccueilComponent implements OnInit {
     displayLoginDialog = false;
 
-    @Output() authentication = new EventEmitter<boolean>();
-
     constructor(private loginService: LoginService, private router: Router) {}
 
     ngOnInit(): void {
@@ -25,8 +23,8 @@ export class AccueilComponent implements OnInit {
         this.loginService
             .login(login, password)
             .subscribe(
-                res => { console.log('connecter: ', res); this.authentication.emit(res) },
-                error => { this.authentication.emit(false); });
+                res => { console.log('connecter: ', res); this.loginService.authenticateSuccess(res, false) },
+                error => { console.log("Connection ECHEC"); });
 
         // setTimeout(() => localStorage.setItem('isAuthenticated', 'true'), 500);
 
