@@ -14,7 +14,7 @@ import {RapportDeLivraisonComponent} from './rapport-de-livraison/rapport-de-liv
 import {DestinataireModule} from './destinataire/destinataire.module';
 import {RapportDeQuaiModule} from './rapport-de-quai/rapport-de-quai.module';
 import {LivraisonColiModule} from './livraison-coli/livraison-coli.module';
-import {MessageService} from "primeng";
+import {MessageModule, MessageService} from "primeng";
 import {ScanQrcodeComponent} from "./scan-qrcode/scan-qrcode.component";
 import {RapportDeLivraisonModule} from "./rapport-de-livraison/rapport-de-livraison.module";
 import {AuthInterceptor} from "./auth/auth.interceptor";
@@ -31,7 +31,8 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
         DestinataireModule,
         RapportDeQuaiModule,
         LivraisonColiModule,
-        RapportDeLivraisonModule
+        RapportDeLivraisonModule,
+        MessageModule
     ],
     exports: [RouterModule, AccueilComponent],
     declarations: [

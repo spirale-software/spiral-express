@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from "@angular/core";
 import {LoginService} from "../login/login.service";
 import {Router} from "@angular/router";
+import {MessageService} from "primeng";
 
 @Component({
     selector: 'app-accueil',
@@ -9,7 +10,7 @@ import {Router} from "@angular/router";
 export class AccueilComponent implements OnInit {
     displayLoginDialog = false;
 
-    constructor(private loginService: LoginService, private router: Router) {}
+    constructor(private loginService: LoginService, private router: Router, private messageService: MessageService) {}
 
     ngOnInit(): void {
     }
@@ -24,9 +25,8 @@ export class AccueilComponent implements OnInit {
             .login(login, password)
             .subscribe(
                 res => { console.log('connecter: ', res); this.loginService.authenticateSuccess(res, false) },
-                error => { console.log("Connection ECHEC"); });
-
-        // setTimeout(() => localStorage.setItem('isAuthenticated', 'true'), 500);
-
+                error => {
+                    this.messageService.add({severity: 'error', summary: 'Erreur connexion.', detail: 'Nom d\'utilisateur ou mot de passe incorrect'})
+                });
     }
 }

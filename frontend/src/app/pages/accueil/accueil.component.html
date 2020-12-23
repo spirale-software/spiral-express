@@ -63,7 +63,7 @@
 </p-dialog>
 -->
 
-<p-dialog  [(visible)]="displayLoginDialog" [baseZIndex]="10000" [modal]="true" [closable]="true">
+<p-dialog  [(visible)]="displayLoginDialog" [baseZIndex]="10000" [modal]="true" [closable]="true" (onHide)="password.value=null;login.value=null">
     <div class="login-body" style="margin-top: 0px!important;">
         <div class="login-panel ui-fluid" style="margin-top: 0px!important;">
             <div class="ui-g">
@@ -75,14 +75,14 @@
                 <div class="ui-g-12">
                     <label>Nom utilisateur</label>
                     <div class="input-wrapper">
-                        <input type="text" autocomplete="off" placeholder="Nom utilisateur" class="ui-inputtext ui-widget">
+                        <input type="text" #login autocomplete="off" placeholder="Nom utilisateur" class="ui-inputtext ui-widget">
                         <img src="../../assets/layout/images/login/user.png" class="user-icon">
                     </div>
                 </div>
                 <div class="ui-g-12">
                     <label>Mot de passe</label>
                     <div class="input-wrapper">
-                        <input type="password" autocomplete="off" placeholder="Mot de passe" class="ui-inputtext ui-widget">
+                        <input type="password" #password autocomplete="off" placeholder="Mot de passe" class="ui-inputtext ui-widget">
                         <img src="../../assets/layout/images/login/lock.png" class="lock-icon">
                     </div>
                 </div>
@@ -93,7 +93,8 @@
                 -->
 
                 <div class="ui-g-12 button-container">
-                    <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only blue-btn raised-btn">
+                    <button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only blue-btn raised-btn"
+                            (click)="connecter(login.value, password.value)">
                         <span class="ui-button-text ui-c">Se connecter</span>
                     </button>
                 </div>
@@ -102,6 +103,8 @@
     </div>
 
 </p-dialog>
+
+<p-toast position="top-center"></p-toast>
 
 <div style="overflow: hidden; background-color: white;">
     <div>
