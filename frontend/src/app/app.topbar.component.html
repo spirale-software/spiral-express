@@ -11,7 +11,7 @@
     </a>
 
     <a href="#" id="user-display" (click)="app.onTopbarMenuButtonClick($event)">
-        <span class="username">Gérard Yannick</span>
+        <span class="username">{{ account?.prenom }} {{ account?.nom }}</span>
         <span style="width: 200px; height: 200px;">
             <i class="fa fa-user-circle-o"></i>
         </span>
