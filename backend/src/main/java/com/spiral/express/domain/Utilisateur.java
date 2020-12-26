@@ -33,10 +33,20 @@ public class Utilisateur  implements Serializable {
     public Utilisateur() {
     }
 
-    public Utilisateur(Personne personne, String login, String password) {
-        this.personne = personne;
-        this.login = login;
-        this.password = password;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Boolean getActif() {
+        return actif;
+    }
+
+    public void setActif(Boolean actif) {
+        this.actif = actif;
     }
 
     public Personne getPersonne() {
