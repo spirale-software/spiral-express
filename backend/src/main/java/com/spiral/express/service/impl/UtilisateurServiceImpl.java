@@ -15,9 +15,11 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
 
     @Override
-    public Utilisateur getCurrentUser() {
+    public UtilisateurDTO getCurrentUser() {
+        log.info("Obtenir utilisateur courant");
         return null;
     }
+
 
     @Override
     public Utilisateur getUtilisateurByLogin(String login) {

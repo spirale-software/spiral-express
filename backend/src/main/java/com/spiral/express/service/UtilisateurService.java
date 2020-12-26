@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UtilisateurService {
 
-    Utilisateur getCurrentUser();
+    UtilisateurDTO getCurrentUser();
     Utilisateur getUtilisateurByLogin(String login);
     Utilisateur getUtilisateurById(Long id);
     List<Utilisateur> getAllUtilisateurs();
