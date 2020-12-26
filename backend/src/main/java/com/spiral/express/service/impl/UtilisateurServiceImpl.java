@@ -41,7 +41,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
     @Override
     public Utilisateur getUtilisateurByLogin(String login) {
-        return null;
+        log.info("Obtenir utilisateur par son login: {}", login);
+        return utilisateurRepository
+                .findByLogin(login)
+                .orElseThrow(() -> new ElementNonExistantException("Pas d'utilisateur avec ce login: " + login));
     }
 
     @Override

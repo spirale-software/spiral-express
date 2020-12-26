@@ -14,7 +14,7 @@ services:
   pgadmin:
     image: dpage/pgadmin4
     depends_on:
-      - spiralexpress-postgresql
+      - spiralexpress-postgresql # *** ATTENTION *** le hostname est: 'spiralexpress-postgresql'
     ports:
       - "5555:80"
     environment:
