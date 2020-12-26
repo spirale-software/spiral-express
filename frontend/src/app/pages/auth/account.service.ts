@@ -17,7 +17,7 @@ export class AccountService {
         if (this.isAccountExists()) {
             return this.getAccount();
         } else {
-            this.http.get('api/expess/account')
+            this.http.get('api/express/utilisateur-courant')
                 .subscribe(
                     res => {
                         this.authenticate(res)
