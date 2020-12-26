@@ -29,13 +29,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     public UtilisateurDTO getCurrentUser() {
         log.info("Obtenir utilisateur courant");
         String currentUserLoin = SecurityUtil.getCurrentUserLoin();
-        System.out.println("currentUserLoin: " + currentUserLoin);
-        return null;
-
-//        return utilisateurRepository
-//                .findByLogin(currentUserLoin)
-//                .map(utilisateurMapper::toDto)
-//                .orElseThrow(() -> new ElementNonExistantException("Pas d'utilisateur avec ce Login: " + currentUserLoin));
+        return utilisateurRepository
+                .findByLogin(currentUserLoin)
+                .map(utilisateurMapper::toDto)
+                .orElseThrow(() -> new ElementNonExistantException("Pas d'utilisateur avec ce Login: " + currentUserLoin));
     }
 
 
