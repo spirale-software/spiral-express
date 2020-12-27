@@ -16,6 +16,9 @@ export class AppTopBarComponent implements OnInit {
 
     ngOnInit(): void {
         this.account = this.accountService.getCurrentAccount();
+        if (!this.account) {
+            setTimeout(() => this.account = this.accountService.getCurrentAccount(), 1000);
+        }
     }
 
 }

@@ -22,6 +22,8 @@ export class LoginService {
     logout(): void {
         localStorage.removeItem('authenticationToken');
         sessionStorage.removeItem('authenticationToken');
+        localStorage.removeItem('account');
+        sessionStorage.removeItem('account');
     }
 
     authenticateSuccess(response: JwtToken, rememberMe: boolean): void {
