@@ -13,7 +13,8 @@
         </div>
 
         <div>
-            <p-dataView #dv [value]="envois" [paginator]="true" [rows]="10" paginatorPosition="bottom">
+            <p-dataView #dv [value]="envois" [paginator]="true" [rows]="10" paginatorPosition="bottom"
+                        emptyMessage="Aucun envoi de coli enregistré">
                 <ng-template let-envoi pTemplate="listItem">
                     <div class="p-col-12">
                         <div class="p-grid p-ai-center vertical-container">
