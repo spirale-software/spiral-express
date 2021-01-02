@@ -12,6 +12,7 @@ import {DESTINATAIRE_ROUTES} from './destinataire/destinataire.route';
 import {RAPPORT_DE_QUAI_ROUTES} from './rapport-de-quai/rapport-de-quai.route';
 import {ScanQrcodeComponent} from "./scan-qrcode/scan-qrcode.component";
 import {RAPPORT_DE_LIVRAISON_ROUTES} from "./rapport-de-livraison/rapport-de-livraison.route";
+import {EnvoiComponent} from "./envoi/envoi.component";
 
 export const PAGES_ROUTES: Routes = [
     {
@@ -21,7 +22,8 @@ export const PAGES_ROUTES: Routes = [
     },
     {
         path: '',
-        component: TableauDeBordComponent
+        component: EnvoiComponent
+        // component: TableauDeBordComponent
     },
     {
         path: 'tableau-de-bord',
