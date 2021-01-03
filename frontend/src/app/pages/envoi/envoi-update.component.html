@@ -201,6 +201,16 @@
             </div>
         </div>
 
-        <app-button-group (retourClicked)="back()" (validerClicked)="onValiderClicked()"></app-button-group>
+
+        <div>
+            <button pButton label="Retour" class="ui-button-secondary" style="margin-right: 7px"
+                    icon="fa fa-chevron-left" (click)="back()">
+            </button>
+            <button pButton label="Enregistrer" icon="fa fa-save" (click)="onValiderClicked()"
+                    [disabled]="!envoiForm.valid">
+            </button>
+        </div>
+
+<!--        <app-button-group (retourClicked)="back()" (validerClicked)="onValiderClicked()"></app-button-group>-->
     </div>
 </div>

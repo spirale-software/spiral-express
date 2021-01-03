@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {MenuItem} from 'primeng';
 import {Router} from '@angular/router';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Envoi} from '../shared/model/envoi';
 import {Client} from '../shared/model/client';
 import {Coli} from '../shared/model/coli';
@@ -16,6 +16,8 @@ import {StatutEnvoi} from "../shared/model/statut-envoi";
     templateUrl: './envoi-update.component.html'
 })
 export class EnvoiUpdateComponent {
+
+    FLOATING_NUMBER_FORMAT = '[+-]?((\\d+\\.?\\d*)|(\\.\\d+))';
 
     breadcrumbItems: MenuItem[];
 
@@ -161,18 +163,18 @@ export class EnvoiUpdateComponent {
     initEnvoiForm(): void {
         this.envoiForm = this.fb.group({
             coli: this.fb.group({
-                description: [],
-                longueur: [],
-                largeur: [],
-                hauteur: [],
-                poids: []
+                description: [null, Validators.required],
+                longueur: [null, [Validators.required, Validators.pattern(this.FLOATING_NUMBER_FORMAT)]],
+                largeur: [null, [Validators.required, Validators.pattern(this.FLOATING_NUMBER_FORMAT)]],
+                hauteur: [null, [Validators.required, Validators.pattern(this.FLOATING_NUMBER_FORMAT)]],
+                poids: [null, [Validators.required, Validators.pattern(this.FLOATING_NUMBER_FORMAT)]]
             }),
-            expediteur: [],
-            destinataire: [],
+            expediteur: [null, Validators.required],
+            destinataire: [null, Validators.required],
             partenaire: [],
             rapportQuai: [],
             rapportLivraison: [],
-            montant: []
+            montant: [null, Validators.required]
         });
 
         this.registerChangeInColi();
@@ -180,7 +182,7 @@ export class EnvoiUpdateComponent {
 
     registerChangeInColi(): void {
         this.envoiForm.get('coli').valueChanges.subscribe((next: Coli) => {
-            if (next.hauteur && next.largeur && next.longueur) {
+            if (Number(next.hauteur) && Number(next.largeur) && Number(next.longueur)) {
                 this.volume = next.longueur * next.largeur * next.hauteur;
                 this.poidsVolumetrique = this.volume / 5000;
             }
