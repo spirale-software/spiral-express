@@ -35,7 +35,10 @@ export class DestinataireComponent implements OnInit {
             this.isOpenLikeDialog = true;
         }
 
-        // this.client = this.router.getCurrentNavigation().extras.state;
+        if (this.router.getCurrentNavigation().extras) {
+            this.client = this.router.getCurrentNavigation().extras.state;
+        }
+
         this.clientId = Number(this.route.snapshot.paramMap.get('clientId'));
     }
 
@@ -47,7 +50,7 @@ export class DestinataireComponent implements OnInit {
     }
 
     setClient() {
-        if (this.destinataires.length > 0) {
+        if (!this.client && this.destinataires.length > 0) {
             this.client = this.destinataires[0].client;
         }
     }

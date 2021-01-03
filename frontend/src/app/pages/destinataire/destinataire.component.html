@@ -19,7 +19,8 @@
         </div>
 
         <div>
-            <p-dataView #dv [value]="destinataires" [paginator]="true" [rows]="10" paginatorPosition="bottom">
+            <p-dataView #dv [value]="destinataires" [paginator]="true" [rows]="10" paginatorPosition="bottom"
+                        emptyMessage="Aucun destinataire associé à ce client">
                 <ng-template let-destinataire pTemplate="listItem">
                     <div class="p-col-12" (click)="navigate(destinataire)">
                         <div class="p-grid p-align-center row-item">
