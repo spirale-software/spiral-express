@@ -10,6 +10,7 @@ import {Personne} from '../shared/model/personne';
 import {Partenaire} from '../shared/model/partenaire';
 import {Destinataire} from '../shared/model/destinataire';
 import {StatutEnvoi} from "../shared/model/statut-envoi";
+import {Utils} from "../shared/util/utils";
 
 @Component({
     selector: 'app-envoi',
@@ -174,7 +175,7 @@ export class EnvoiUpdateComponent {
             partenaire: [],
             rapportQuai: [],
             rapportLivraison: [],
-            montant: [null, Validators.required]
+            montant: [null, [Validators.required, Validators.pattern(this.FLOATING_NUMBER_FORMAT)]]
         });
 
         this.registerChangeInColi();
@@ -183,8 +184,8 @@ export class EnvoiUpdateComponent {
     registerChangeInColi(): void {
         this.envoiForm.get('coli').valueChanges.subscribe((next: Coli) => {
             if (Number(next.hauteur) && Number(next.largeur) && Number(next.longueur)) {
-                this.volume = next.longueur * next.largeur * next.hauteur;
-                this.poidsVolumetrique = this.volume / 5000;
+                this.volume = Utils.getVolume(next);
+                this.poidsVolumetrique = Utils.getPoidsVolumetrique(next);
             }
         });
     }

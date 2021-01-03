@@ -1,7 +1,7 @@
 <!--
 -->
 
-<p-dialog [header]="titreDialog" [(visible)]="isVisible" [modal]="true" [closable]="false">
+<p-dialog [header]="titreDialog" [(visible)]="isVisible" [modal]="true" [closable]="false" [styleClass]="'envoi-form-dialog'">
 
     <ng-template [ngIf]="displayEnvoiDetail">
         <app-envoi-detail [isOpenLikeDialog]="true" [envoi]="envoi" [showHeader]="false"></app-envoi-detail>

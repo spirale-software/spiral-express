@@ -12,6 +12,10 @@ export class Utils {
         return volume;
     }
 
+    public static getPoidsVolumetrique(coli: Coli): number {
+        return this.getVolume(coli) / 5000;
+    }
+
     public static getExpediteur(expediteur: Client): string {
         let expediteurNom = '';
         if (expediteur) {

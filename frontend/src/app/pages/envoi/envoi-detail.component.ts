@@ -3,6 +3,7 @@ import {MenuItem} from "primeng";
 import {ActivatedRoute} from "@angular/router";
 import {Envoi} from "../shared/model/envoi";
 import {EnvoiService} from "./envoi.service";
+import {Utils} from "../shared/util/utils";
 
 @Component({
     selector: 'app-envoi-detail',
@@ -66,9 +67,9 @@ export class EnvoiDetailComponent implements OnInit, OnChanges {
         this.adresseDestinataire = `${this.envoi?.destinataire?.adresse.rue} ${this.envoi?.destinataire?.adresse.codePostal} 
             ${this.envoi?.destinataire?.adresse.ville} ${this.envoi?.destinataire?.adresse.pays}`;
 
-        this.volume = this.envoi?.coli?.longueur * this.envoi?.coli?.largeur * this.envoi?.coli?.hauteur;
+        this.volume = Utils.getVolume(this.envoi.coli);
 
-        this.poidsVolumetrique = 0;
+        this.poidsVolumetrique = Utils.getPoidsVolumetrique(this.envoi.coli);
     }
 
     setEnvoiById(envoiId: number): void {
