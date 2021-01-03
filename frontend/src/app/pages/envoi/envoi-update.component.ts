@@ -106,6 +106,7 @@ export class EnvoiUpdateComponent {
 
         const fullName = expediteur.prenom + ' ' + expediteur.prenom;
         this.envoiForm.get('expediteur').setValue(fullName);
+        this.envoiForm.get('destinataire').setValue(null);
     }
 
     onDestinataireSelect(destinataire: Destinataire) {

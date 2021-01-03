@@ -1,7 +1,7 @@
 <!--
 -->
 
-<p-dialog [header]="titreDialog" [(visible)]="isVisible" [modal]="true" [style]="{'width':'90%'}">
+<p-dialog [header]="titreDialog" [(visible)]="isVisible" [modal]="true" [closable]="false">
 
     <ng-template [ngIf]="displayEnvoiDetail">
         <app-envoi-detail [isOpenLikeDialog]="true" [envoi]="envoi" [showHeader]="false"></app-envoi-detail>
@@ -137,9 +137,11 @@
                         <button type="button" pButton icon="pi pi-search"
                                 (click)="onSearchExpediteurClicked()" style="padding: 0px 7px">
                         </button>
-                        <button type="button" pButton pRipple icon="pi pi-eye" style="background-color: #00ffff; padding: 0px 7px"
-                                (click)="voirDetailExpediteur()">
-                        </button>
+
+<!--                        <button type="button" pButton pRipple icon="pi pi-eye" style="background-color: #00ffff; padding: 0px 7px"-->
+<!--                                (click)="voirDetailExpediteur()">-->
+<!--                        </button>-->
+
                     </div>
                 </div>
 
@@ -148,11 +150,12 @@
                     <div class="p-inputgroup">
                         <input type="text" pInputText formControlName="destinataire">
                         <button type="button" pButton pRipple icon="pi pi-search" style="padding: 0px 7px"
-                                (click)="onSearchDestinataireClicked()">
+                                (click)="onSearchDestinataireClicked()" [disabled]="!envoiForm.get('expediteur').value">
                         </button>
-                        <button type="button" pButton pRipple icon="pi pi-eye" style="background-color: #00ffff; padding: 0px 7px"
-                                (click)="voirDetailDestinataire()">
-                        </button>
+
+<!--                        <button type="button" pButton pRipple icon="pi pi-eye" style="background-color: #00ffff; padding: 0px 7px"-->
+<!--                                (click)="voirDetailDestinataire()">-->
+<!--                        </button>-->
 
                     </div>
                 </div>
@@ -164,11 +167,11 @@
             <div class="p-grid">
                 <div class="p-col p-md-4">
                     <div class="ui-fluid"><span>Rapport de quai</span></div>
-                    <textarea pInputTextarea [rows]="3" [cols]="35" formControlName="rapportQuai"></textarea>
+                    <textarea pInputTextarea [rows]="3" [cols]="35" formControlName="rapportQuai" disabled></textarea>
                 </div>
                 <div class="p-col">
                     <div class="ui-fluid"><span>Rapport de livraison</span></div>
-                    <textarea pInputTextarea [rows]="3" [cols]="35" formControlName="rapportLivraison"></textarea>
+                    <textarea pInputTextarea [rows]="3" [cols]="35" formControlName="rapportLivraison" disabled></textarea>
                 </div>
             </div>
             </div>
