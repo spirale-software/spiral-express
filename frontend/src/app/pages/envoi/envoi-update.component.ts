@@ -61,7 +61,7 @@ export class EnvoiUpdateComponent {
 
         const myDate = new Date();
         this.currentDate = `${myDate.getDate()}/${myDate.getUTCMonth() + 1}/${myDate.getFullYear()}`;
-        this.envoi.dateCreation = this.currentDate;
+        this.envoi.dateCreation = myDate;
         this.envoi.statut = StatutEnvoi.PRISE_EN_CHARGE;
 
         this.volume = 0;
