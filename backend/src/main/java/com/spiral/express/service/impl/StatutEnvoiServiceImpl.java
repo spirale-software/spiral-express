@@ -1,6 +1,6 @@
 package com.spiral.express.service.impl;
 
-import com.spiral.express.domain.Destinataire;
+import com.spiral.express.config.ApplicationProperties;
 import com.spiral.express.domain.Envoi;
 import com.spiral.express.domain.Personne;
 import com.spiral.express.domain.enumeration.StatutEnvoi;
@@ -20,25 +20,29 @@ public class StatutEnvoiServiceImpl implements StatutEnvoiService {
 
     private final SmsService smsService;
     private final MailService mailService;
+    private final ApplicationProperties appProperties;
 
-    public StatutEnvoiServiceImpl(SmsService smsService, MailService mailService) {
+    public StatutEnvoiServiceImpl(SmsService smsService, MailService mailService, ApplicationProperties appProperties) {
         this.smsService = smsService;
         this.mailService = mailService;
+        this.appProperties = appProperties;
     }
 
     @Override
     public Envoi prisEnCharge(Envoi envoi) {
         log.info("Prise en charge de l'envoi: {}", envoi);
 
-        String destinataireMsg = "Un coli vous ai destiné";
-        Personne destinataire = envoi.getDestinataire().getPersonne();
-        String tel = CodePaysUtils.getCodePays(destinataire.getAdresse().getPays()) + destinataire.getTelephone();
-        smsService.sendSms(tel, destinataireMsg);
+        if (appProperties.isSendSms()) {
+            String destinataireMsg = "Un coli vous ai destiné";
+            Personne destinataire = envoi.getDestinataire().getPersonne();
+            String tel = CodePaysUtils.getCodePays(destinataire.getAdresse().getPays()) + destinataire.getTelephone();
+            smsService.sendSms(tel, destinataireMsg);
 
-        String expediteurMsg = "Votre coli est bien pris en charge.";
-        Personne expediteur = envoi.getExpediteur().getPersonne();
-        String tel2 = CodePaysUtils.getCodePays(expediteur.getAdresse().getPays()) + expediteur.getTelephone();
-        smsService.sendSms(tel2, expediteurMsg);
+            String expediteurMsg = "Votre coli est bien pris en charge.";
+            Personne expediteur = envoi.getExpediteur().getPersonne();
+            String tel2 = CodePaysUtils.getCodePays(expediteur.getAdresse().getPays()) + expediteur.getTelephone();
+            smsService.sendSms(tel2, expediteurMsg);
+        }
 
         String subject = "Suivi envoi: " + envoi.getReference();
         String contenu = "Suivez votre envoi";

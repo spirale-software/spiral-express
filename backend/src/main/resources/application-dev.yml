@@ -47,3 +47,4 @@ application:
     phone-number: '+13518881502'
   mail:
     from: gyleentrepreneur@gmail.com
+  sendSms: false

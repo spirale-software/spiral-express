@@ -6,6 +6,15 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class ApplicationProperties {
     private Twilio twilio;
     private Mail mail;
+    private boolean sendSms;
+
+    public boolean isSendSms() {
+        return sendSms;
+    }
+
+    public void setSendSms(boolean sendSms) {
+        this.sendSms = sendSms;
+    }
 
     public Twilio getTwilio() {
         return twilio;
