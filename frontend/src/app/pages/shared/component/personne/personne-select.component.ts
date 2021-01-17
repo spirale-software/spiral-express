@@ -33,10 +33,15 @@ export class PersonneSelectComponent implements OnInit {
 
     ngOnInit(): void {
         if (this.isPartenaire) {
-            this.partenaireService.findAll().subscribe(res => this.personnes = res.body);
+            this.partenaireService.findAll().subscribe(res => {
+                console.log("call service");
+                this.personnes = res.body
+            });
         }
         if (this.isExpediteur) {
-            this.clientService.findAll().subscribe(res => this.personnes = res.body);
+            this.clientService.findAll().subscribe(res => {
+                this.personnes = res.body
+            });
         }
         if (this.isDestinataire && this.clientId) {
             this.destinataireService.findAllByClientId(this.clientId).subscribe(res => this.personnes = res.body);
