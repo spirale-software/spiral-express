@@ -54,6 +54,10 @@ public class Envoi implements Serializable {
     @ManyToOne
     @JsonIgnoreProperties(value = "envois", allowSetters = true)
     private Destinataire destinataire;
+    
+    @ManyToOne
+    @JsonIgnoreProperties(value = "envois", allowSetters = true)
+    private Partenaire partenaire;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -180,9 +184,23 @@ public class Envoi implements Serializable {
     public void setDestinataire(Destinataire destinataire) {
         this.destinataire = destinataire;
     }
+    
+    public Envoi partenaire(Partenaire partenaire) {
+    	this.partenaire = partenaire;
+    	return this;
+    }
+    
+    public Partenaire getPartenaire() {
+		return partenaire;
+	}
+
+	public void setPartenaire(Partenaire partenaire) {
+		this.partenaire = partenaire;
+	}
+    
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
-    @Override
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

@@ -2,8 +2,6 @@ package com.spiral.express.utils;
 
 import com.spiral.express.domain.enumeration.Pays;
 
-import java.util.Arrays;
-
 public class CodePaysUtils {
 
     public static String getCodePays(Pays pays) {

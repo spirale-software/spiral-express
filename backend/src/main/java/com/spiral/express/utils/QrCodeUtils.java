@@ -10,7 +10,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.nio.file.Paths;
 
 public class QrCodeUtils {
     private static final Logger log = LoggerFactory.getLogger(QrCodeUtils.class);
