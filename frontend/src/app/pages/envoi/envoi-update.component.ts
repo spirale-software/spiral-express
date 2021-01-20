@@ -118,7 +118,7 @@ export class EnvoiUpdateComponent {
         this.closeDialog();
         this.destinataire = destinataire;
 
-        const fullName = destinataire.prenom + ' ' + destinataire.prenom;
+        const fullName = destinataire.prenom + ' ' + destinataire.nom;
         this.envoiForm.get('destinataire').setValue(fullName);
     }
 

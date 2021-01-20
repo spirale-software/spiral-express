@@ -24,9 +24,13 @@ export class EnvoiDetailComponent implements OnInit, OnChanges {
 
     fullNameDestinataire;
 
+    fullNamePartenaire: string;
+
     adresseExpediteur;
 
     adresseDestinataire;
+
+    adressePartenaire: string;
 
     volume;
 
@@ -64,6 +68,9 @@ export class EnvoiDetailComponent implements OnInit, OnChanges {
         this.fullNameDestinataire = this.envoi?.destinataire?.prenom.toUpperCase() + ' ' + this.envoi?.destinataire?.nom.toUpperCase();
         this.setAdresseDestinataire();
 
+        this.fullNamePartenaire = this.envoi?.partenaire?.prenom.toUpperCase() + ' ' + this.envoi?.partenaire?.nom.toUpperCase();
+        this.setAdressePartenaire();
+
         this.volume = Utils.getVolume(this.envoi.coli);
 
         this.poidsVolumetrique = Utils.getPoidsVolumetrique(this.envoi.coli);
@@ -82,6 +89,18 @@ export class EnvoiDetailComponent implements OnInit, OnChanges {
             this.envoi.expediteur.adresse.ville : this.adresseExpediteur;
 
         this.adresseExpediteur = this.adresseExpediteur + ' ' + this.envoi.expediteur.adresse.pays;
+    }
+
+    setAdressePartenaire() {
+        this.adressePartenaire = this.envoi.partenaire.adresse.rue ? this.envoi.partenaire.adresse.rue : '';
+
+        this.adressePartenaire = this.envoi.partenaire.adresse.codePostal ? this.adressePartenaire + ' '
+            + this.envoi.partenaire.adresse.codePostal : this.adressePartenaire;
+
+        this.adressePartenaire = this.envoi.partenaire.adresse.ville ?this.adressePartenaire + ' ' +
+            this.envoi.partenaire.adresse.ville : this.adressePartenaire;
+
+        this.adressePartenaire = this.adressePartenaire + ' ' + this.envoi.partenaire.adresse.pays;
     }
 
     setAdresseDestinataire(): void {
