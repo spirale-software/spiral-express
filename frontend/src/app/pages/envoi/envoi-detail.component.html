@@ -70,7 +70,7 @@
             <span>{{ adresseDestinataire }}</span>
         </div>
 
-        <div style="margin-bottom: 21px">
+        <div *ngIf="adressePartenaire != undefined || adressePartenaire != null" style="margin-bottom: 21px">
             <span class="nom-label">Partenaire</span>
             <span style="display: block">{{ fullNamePartenaire }}</span>
             <span>{{ adressePartenaire }}</span>
