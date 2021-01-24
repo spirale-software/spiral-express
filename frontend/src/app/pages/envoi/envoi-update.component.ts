@@ -99,6 +99,8 @@ export class EnvoiUpdateComponent {
        this.closeDialog();
        this.partenaire = partenaire;
 
+       console.log("Choose Partenaire");
+
        const fullName = partenaire.prenom + ' ' + partenaire.prenom;
        this.envoiForm.get('partenaire').setValue(fullName);
     }
@@ -116,7 +118,7 @@ export class EnvoiUpdateComponent {
         this.closeDialog();
         this.destinataire = destinataire;
 
-        const fullName = destinataire.prenom + ' ' + destinataire.prenom;
+        const fullName = destinataire.prenom + ' ' + destinataire.nom;
         this.envoiForm.get('destinataire').setValue(fullName);
     }
 
@@ -172,7 +174,7 @@ export class EnvoiUpdateComponent {
             }),
             expediteur: [null, Validators.required],
             destinataire: [null, Validators.required],
-            partenaire: [],
+            partenaire: ['', Validators.required],
             rapportQuai: [],
             rapportLivraison: [],
             montant: [null, [Validators.required, Validators.pattern(this.FLOATING_NUMBER_FORMAT)]]

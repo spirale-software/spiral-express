@@ -6,7 +6,7 @@ import org.mapstruct.Mapper;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {ColiMapper.class, DestinataireMapper.class, ClientMapper.class})
+@Mapper(componentModel = "spring", uses = {ColiMapper.class, DestinataireMapper.class, ClientMapper.class, PartenaireMapper.class})
 public interface EnvoiMapper {
 
     EnvoiDTO toDto(Envoi entity);

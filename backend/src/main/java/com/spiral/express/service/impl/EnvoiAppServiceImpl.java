@@ -2,7 +2,6 @@ package com.spiral.express.service.impl;
 
 import com.spiral.express.domain.Coli;
 import com.spiral.express.domain.Envoi;
-import com.spiral.express.domain.enumeration.StatutEnvoi;
 import com.spiral.express.dto.EnvoiDTO;
 import com.spiral.express.repository.EnvoiAppRepository;
 import com.spiral.express.service.ColiAppService;
@@ -42,13 +41,19 @@ public class EnvoiAppServiceImpl implements EnvoiAppService {
     public EnvoiDTO create(EnvoiDTO dto) {
         log.info("Créer un nouvel envoi: {}", dto);
 
+        // une exceptipn ?
         if (dto.getExpediteur() == null || dto.getExpediteur().getPersonneId() == null) {
             System.out.println("L'expéditeur ne peut être null.");
         }
         if (dto.getDestinataire() == null || dto.getDestinataire().getPersonneId() == null) {
             System.out.println("Le destinataire ne peut être null.");
         }
-
+        if (dto.getPartenaire() == null || dto.getPartenaire().getPersonneId() == null) {
+        	System.out.println("Le partenaire ne peut être null.");
+        }
+        
+        System.out.println("PartenaireDto ***** " + dto.getPartenaire().getNom());
+        
         Coli coli = coliAppService.create(dto.getColi());
         Envoi envoi = envoiMapper.toEntity(dto);
         envoi.setColi(coli);

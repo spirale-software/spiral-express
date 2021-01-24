@@ -70,6 +70,12 @@
             <span>{{ adresseDestinataire }}</span>
         </div>
 
+        <div *ngIf="adressePartenaire != undefined || adressePartenaire != null" style="margin-bottom: 21px">
+            <span class="nom-label">Partenaire</span>
+            <span style="display: block">{{ fullNamePartenaire }}</span>
+            <span>{{ adressePartenaire }}</span>
+        </div>
+
         <div>
             <span class="nom-label">Montant à payer</span>
             <span style="display: block">{{ envoi?.montant }} EUR</span>

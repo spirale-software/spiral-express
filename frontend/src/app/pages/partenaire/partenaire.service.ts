@@ -22,6 +22,7 @@ export class PartenaireService {
     }
 
     findAll(): Observable<HttpResponse<Partenaire[]>> {
+        console.log("get all partenaires");
         return this.http.get<Partenaire[]>(this.url, {observe: 'response'});
     }
 
