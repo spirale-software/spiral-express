@@ -62,6 +62,8 @@ export class EnvoiDetailComponent implements OnInit, OnChanges {
     }
 
     setValues(): void {
+
+        console.log("detail envoi ", this.envoi);
         this.fullNameExpediteur = this.envoi?.expediteur?.prenom.toUpperCase() + ' ' + this.envoi?.expediteur?.nom.toUpperCase();
         this.setAdresseExpediteur();
 
@@ -80,7 +82,7 @@ export class EnvoiDetailComponent implements OnInit, OnChanges {
         // this.adresseExpediteur = `${this.envoi?.expediteur?.adresse?.rue} ${this.envoi?.expediteur?.adresse.codePostal}
         //     ${this.envoi?.expediteur?.adresse.ville} ${this.envoi?.expediteur?.adresse.pays}`;
 
-        this.adresseExpediteur = this.envoi.expediteur.adresse.rue ? this.envoi.expediteur.adresse.rue : '';
+        this.adresseExpediteur = this.envoi.expediteur.adresse?.rue ? this.envoi.expediteur.adresse?.rue : '';
 
         this.adresseExpediteur = this.envoi.expediteur.adresse.codePostal ? this.adresseExpediteur + ' '
             + this.envoi.expediteur.adresse.codePostal : this.adresseExpediteur;
@@ -92,15 +94,19 @@ export class EnvoiDetailComponent implements OnInit, OnChanges {
     }
 
     setAdressePartenaire() {
-        this.adressePartenaire = this.envoi.partenaire.adresse.rue ? this.envoi.partenaire.adresse.rue : '';
 
-        this.adressePartenaire = this.envoi.partenaire.adresse.codePostal ? this.adressePartenaire + ' '
-            + this.envoi.partenaire.adresse.codePostal : this.adressePartenaire;
+        if (this.envoi.partenaire) {
+            this.adressePartenaire = this.envoi.partenaire.adresse?.rue ? ' ' : this.envoi.partenaire.adresse?.rue ;
 
-        this.adressePartenaire = this.envoi.partenaire.adresse.ville ?this.adressePartenaire + ' ' +
-            this.envoi.partenaire.adresse.ville : this.adressePartenaire;
-
-        this.adressePartenaire = this.adressePartenaire + ' ' + this.envoi.partenaire.adresse.pays;
+            this.adressePartenaire = this.envoi.partenaire.adresse.codePostal ? this.adressePartenaire + ' '
+                + this.envoi.partenaire.adresse.codePostal : this.adressePartenaire;
+    
+            this.adressePartenaire = this.envoi.partenaire.adresse.ville ? this.adressePartenaire + ' ' +
+                this.envoi.partenaire.adresse.ville : this.adressePartenaire;
+    
+            this.adressePartenaire = this.adressePartenaire + ' ' + this.envoi.partenaire.adresse.pays;
+        } 
+        
     }
 
     setAdresseDestinataire(): void {

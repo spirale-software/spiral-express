@@ -52,7 +52,7 @@
                             <div class="p-md-4 small-screen-hide">
                                 <button pButton label="Générer document" icon="pi pi-file-pdf" style="margin-right: 7px" (click)="genererDocument(envoi.id)"></button>
                                 <button pButton label="Détail" icon="fa fa-eye" style="margin-right: 7px; background-color: #17a2b8" [routerLink]="['/envois', envoi.id, 'detail']"></button>
-                                <button pButton label="Modifier" icon="fa fa-pencil" style="margin-right: 7px" class="ui-button ui-button-warning"></button>
+                                <button pButton label="Modifier" icon="fa fa-pencil" style="margin-right: 7px" class="ui-button ui-button-warning" [routerLink]="['/envois', envoi.id, 'modifier']"></button>
 <!--                                <button pButton label="Supprimer" icon="fa fa-trash" class="ui-button ui-button-danger"></button>-->
                             </div>
                         </div>

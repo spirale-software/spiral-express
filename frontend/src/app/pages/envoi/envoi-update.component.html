@@ -39,7 +39,7 @@
 
     <div class="card card-w-title main-content">
         <div class="p-grid">
-            <div class="p-col-12 p-md-9"><h1>Encodage d'un nouvel envoi</h1></div>
+            <div class="p-col-12 p-md-9"><h1> {{ titre }}</h1></div>
         </div>
 
         <div style="margin-bottom: 35px">
@@ -50,11 +50,11 @@
             <div class="p-grid" style="margin-bottom: 15px">
                 <div class="p-col">
                     <span style="display: block">Date</span>
-                    <span>{{ currentDate }}</span>
+                    <span>{{ envoi.dateCreation | date :'dd/MM/yyyy' }}</span>
                 </div>
                 <div class="p-col">
                     <span style="display: block">Statut</span>
-                    <span>Pris en charge</span>
+                    <span> {{envoi.statut}} </span>
                 </div>
 <!--                <div class="p-col p-md-2">-->
 <!--                    <span style="display: block">Référence</span>-->
@@ -217,6 +217,7 @@
             <button pButton label="Retour" class="ui-button-secondary" style="margin-right: 7px"
                     icon="fa fa-chevron-left" (click)="back()">
             </button>
+            
             <button pButton label="Enregistrer" icon="fa fa-save" (click)="onValiderClicked()"
                     [disabled]="!envoiForm.valid">
             </button>

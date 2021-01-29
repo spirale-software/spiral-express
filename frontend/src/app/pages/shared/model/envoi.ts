@@ -7,7 +7,7 @@ import {Destinataire} from "./destinataire";
 
 export interface Envoi {
     id ?: number;
-    dateCreation ?: any;
+    dateCreation ?: Date;
     statut ?: StatutEnvoi;
     reference ?: string;
     coli ?: Coli;

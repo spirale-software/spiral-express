@@ -68,7 +68,8 @@ public class EnvoiAppServiceImpl implements EnvoiAppService {
     @Override
     public EnvoiDTO update(EnvoiDTO dto) {
         log.info("Modifier un envoi: {}", dto);
-        return null;
+        
+        return envoiMapper.toDto(envoiAppRepository.save(envoiMapper.toEntity(dto)));
     }
 
     @Override
